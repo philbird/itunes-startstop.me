@@ -1,0 +1,521 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="ValidateAPIKey">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="APIKey" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ValidateAPIKeyResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ValidateAPIKeyResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CreateWindowApp">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="APIKey" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Signature" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="TypeID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="LongDescription" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="MoreInformationURL" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CreateWindowAppResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="CreateWindowAppResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CreateGenericApp">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="APIKey" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ApplicationName" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="ApplicationType" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CreateGenericAppResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="CreateGenericAppResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CreateDetailedStat">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="APIKey" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="StatName" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="LinkedID" type="s:long" />
+            <s:element minOccurs="0" maxOccurs="1" name="StatDetailDescription" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="TypeOfApplicationID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="TypeOfStat" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CreateDetailedStatResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="CreateDetailedStatResult" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ExactStatUpdateForUser">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="APIKey" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="UserID" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="DetailedStatID" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="Count" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="Percentage" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ExactStatUpdateForUserResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ExactStatUpdateForUserResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="IncrementStatUpdateForUser">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="APIKey" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="UserID" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="DetailedStatID" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="Count" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="Percentage" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="IncrementStatUpdateForUserResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="IncrementStatUpdateForUserResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AuthenticateUser">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="APIKey" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AuthenticateUserResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="AuthenticateUserResult" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddTrophy">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="APIKey" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="TrophyName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="TrophyAwardConditionToShowUser" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="TrophyDescription" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="TriggerSQL" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="TriggerReturnValue" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddTrophyResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="AddTrophyResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReturnLatestWebServiceVersionAndEndPoint">
+        <s:complexType />
+      </s:element>
+      <s:element name="ReturnLatestWebServiceVersionAndEndPointResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ReturnLatestWebServiceVersionAndEndPointResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SendUserEmail">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="APIKey" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="UserID" type="s:long" />
+            <s:element minOccurs="0" maxOccurs="1" name="MessageToSend" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="MessageFrom" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="MessageType" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SendUserEmailResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="SendUserEmailResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SendUserMessage">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="APIKey" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="UserID" type="s:long" />
+            <s:element minOccurs="0" maxOccurs="1" name="MessageToSend" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="MessageFrom" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SendUserMessageResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="SendUserMessageResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="ValidateAPIKeySoapIn">
+    <wsdl:part name="parameters" element="tns:ValidateAPIKey" />
+  </wsdl:message>
+  <wsdl:message name="ValidateAPIKeySoapOut">
+    <wsdl:part name="parameters" element="tns:ValidateAPIKeyResponse" />
+  </wsdl:message>
+  <wsdl:message name="CreateWindowAppSoapIn">
+    <wsdl:part name="parameters" element="tns:CreateWindowApp" />
+  </wsdl:message>
+  <wsdl:message name="CreateWindowAppSoapOut">
+    <wsdl:part name="parameters" element="tns:CreateWindowAppResponse" />
+  </wsdl:message>
+  <wsdl:message name="CreateGenericAppSoapIn">
+    <wsdl:part name="parameters" element="tns:CreateGenericApp" />
+  </wsdl:message>
+  <wsdl:message name="CreateGenericAppSoapOut">
+    <wsdl:part name="parameters" element="tns:CreateGenericAppResponse" />
+  </wsdl:message>
+  <wsdl:message name="CreateDetailedStatSoapIn">
+    <wsdl:part name="parameters" element="tns:CreateDetailedStat" />
+  </wsdl:message>
+  <wsdl:message name="CreateDetailedStatSoapOut">
+    <wsdl:part name="parameters" element="tns:CreateDetailedStatResponse" />
+  </wsdl:message>
+  <wsdl:message name="ExactStatUpdateForUserSoapIn">
+    <wsdl:part name="parameters" element="tns:ExactStatUpdateForUser" />
+  </wsdl:message>
+  <wsdl:message name="ExactStatUpdateForUserSoapOut">
+    <wsdl:part name="parameters" element="tns:ExactStatUpdateForUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="IncrementStatUpdateForUserSoapIn">
+    <wsdl:part name="parameters" element="tns:IncrementStatUpdateForUser" />
+  </wsdl:message>
+  <wsdl:message name="IncrementStatUpdateForUserSoapOut">
+    <wsdl:part name="parameters" element="tns:IncrementStatUpdateForUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="AuthenticateUserSoapIn">
+    <wsdl:part name="parameters" element="tns:AuthenticateUser" />
+  </wsdl:message>
+  <wsdl:message name="AuthenticateUserSoapOut">
+    <wsdl:part name="parameters" element="tns:AuthenticateUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="AddTrophySoapIn">
+    <wsdl:part name="parameters" element="tns:AddTrophy" />
+  </wsdl:message>
+  <wsdl:message name="AddTrophySoapOut">
+    <wsdl:part name="parameters" element="tns:AddTrophyResponse" />
+  </wsdl:message>
+  <wsdl:message name="ReturnLatestWebServiceVersionAndEndPointSoapIn">
+    <wsdl:part name="parameters" element="tns:ReturnLatestWebServiceVersionAndEndPoint" />
+  </wsdl:message>
+  <wsdl:message name="ReturnLatestWebServiceVersionAndEndPointSoapOut">
+    <wsdl:part name="parameters" element="tns:ReturnLatestWebServiceVersionAndEndPointResponse" />
+  </wsdl:message>
+  <wsdl:message name="SendUserEmailSoapIn">
+    <wsdl:part name="parameters" element="tns:SendUserEmail" />
+  </wsdl:message>
+  <wsdl:message name="SendUserEmailSoapOut">
+    <wsdl:part name="parameters" element="tns:SendUserEmailResponse" />
+  </wsdl:message>
+  <wsdl:message name="SendUserMessageSoapIn">
+    <wsdl:part name="parameters" element="tns:SendUserMessage" />
+  </wsdl:message>
+  <wsdl:message name="SendUserMessageSoapOut">
+    <wsdl:part name="parameters" element="tns:SendUserMessageResponse" />
+  </wsdl:message>
+  <wsdl:portType name="DeveloperAPISoap">
+    <wsdl:operation name="ValidateAPIKey">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Validate the APIKey</wsdl:documentation>
+      <wsdl:input message="tns:ValidateAPIKeySoapIn" />
+      <wsdl:output message="tns:ValidateAPIKeySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateWindowApp">
+      <wsdl:input message="tns:CreateWindowAppSoapIn" />
+      <wsdl:output message="tns:CreateWindowAppSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateGenericApp">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">A Generic application is any application which is not, presently, a windows application, for example a web app</wsdl:documentation>
+      <wsdl:input message="tns:CreateGenericAppSoapIn" />
+      <wsdl:output message="tns:CreateGenericAppSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateDetailedStat">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Creates a detailed stats record, associated with a linked application or generic app. A generic app is, for example a web based agme</wsdl:documentation>
+      <wsdl:input message="tns:CreateDetailedStatSoapIn" />
+      <wsdl:output message="tns:CreateDetailedStatSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ExactStatUpdateForUser">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Updates a specific stat for a user. Exact values should be passed (i.e. cumlative) for this method</wsdl:documentation>
+      <wsdl:input message="tns:ExactStatUpdateForUserSoapIn" />
+      <wsdl:output message="tns:ExactStatUpdateForUserSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="IncrementStatUpdateForUser">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Updates a specific stat for a user. Incremental values should be passed for this method, for example '1', will add one to the running total</wsdl:documentation>
+      <wsdl:input message="tns:IncrementStatUpdateForUserSoapIn" />
+      <wsdl:output message="tns:IncrementStatUpdateForUserSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AuthenticateUser">
+      <wsdl:input message="tns:AuthenticateUserSoapIn" />
+      <wsdl:output message="tns:AuthenticateUserSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddTrophy">
+      <wsdl:input message="tns:AddTrophySoapIn" />
+      <wsdl:output message="tns:AddTrophySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReturnLatestWebServiceVersionAndEndPoint">
+      <wsdl:input message="tns:ReturnLatestWebServiceVersionAndEndPointSoapIn" />
+      <wsdl:output message="tns:ReturnLatestWebServiceVersionAndEndPointSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SendUserEmail">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Send an internal email to user</wsdl:documentation>
+      <wsdl:input message="tns:SendUserEmailSoapIn" />
+      <wsdl:output message="tns:SendUserEmailSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SendUserMessage">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Send an alert to the user</wsdl:documentation>
+      <wsdl:input message="tns:SendUserMessageSoapIn" />
+      <wsdl:output message="tns:SendUserMessageSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="DeveloperAPISoap" type="tns:DeveloperAPISoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ValidateAPIKey">
+      <soap:operation soapAction="http://tempuri.org/ValidateAPIKey" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateWindowApp">
+      <soap:operation soapAction="http://tempuri.org/CreateWindowApp" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateGenericApp">
+      <soap:operation soapAction="http://tempuri.org/CreateGenericApp" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateDetailedStat">
+      <soap:operation soapAction="http://tempuri.org/CreateDetailedStat" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ExactStatUpdateForUser">
+      <soap:operation soapAction="http://tempuri.org/ExactStatUpdateForUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IncrementStatUpdateForUser">
+      <soap:operation soapAction="http://tempuri.org/IncrementStatUpdateForUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AuthenticateUser">
+      <soap:operation soapAction="http://tempuri.org/AuthenticateUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddTrophy">
+      <soap:operation soapAction="http://tempuri.org/AddTrophy" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReturnLatestWebServiceVersionAndEndPoint">
+      <soap:operation soapAction="http://tempuri.org/ReturnLatestWebServiceVersionAndEndPoint" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendUserEmail">
+      <soap:operation soapAction="http://tempuri.org/SendUserEmail" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendUserMessage">
+      <soap:operation soapAction="http://tempuri.org/SendUserMessage" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="DeveloperAPISoap12" type="tns:DeveloperAPISoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ValidateAPIKey">
+      <soap12:operation soapAction="http://tempuri.org/ValidateAPIKey" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateWindowApp">
+      <soap12:operation soapAction="http://tempuri.org/CreateWindowApp" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateGenericApp">
+      <soap12:operation soapAction="http://tempuri.org/CreateGenericApp" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateDetailedStat">
+      <soap12:operation soapAction="http://tempuri.org/CreateDetailedStat" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ExactStatUpdateForUser">
+      <soap12:operation soapAction="http://tempuri.org/ExactStatUpdateForUser" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IncrementStatUpdateForUser">
+      <soap12:operation soapAction="http://tempuri.org/IncrementStatUpdateForUser" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AuthenticateUser">
+      <soap12:operation soapAction="http://tempuri.org/AuthenticateUser" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddTrophy">
+      <soap12:operation soapAction="http://tempuri.org/AddTrophy" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReturnLatestWebServiceVersionAndEndPoint">
+      <soap12:operation soapAction="http://tempuri.org/ReturnLatestWebServiceVersionAndEndPoint" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendUserEmail">
+      <soap12:operation soapAction="http://tempuri.org/SendUserEmail" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendUserMessage">
+      <soap12:operation soapAction="http://tempuri.org/SendUserMessage" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="DeveloperAPI">
+    <wsdl:port name="DeveloperAPISoap" binding="tns:DeveloperAPISoap">
+      <soap:address location="http://statdrop.startstop.me/developerapi.asmx" />
+    </wsdl:port>
+    <wsdl:port name="DeveloperAPISoap12" binding="tns:DeveloperAPISoap12">
+      <soap12:address location="http://statdrop.startstop.me/developerapi.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
