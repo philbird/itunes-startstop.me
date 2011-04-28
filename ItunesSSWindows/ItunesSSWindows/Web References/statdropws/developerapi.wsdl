@@ -109,7 +109,7 @@
         <s:complexType>
           <s:sequence>
             <s:element minOccurs="0" maxOccurs="1" name="APIKey" type="s:string" />
-            <s:element minOccurs="0" maxOccurs="1" name="Username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="EmailAddress" type="s:string" />
             <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
           </s:sequence>
         </s:complexType>
@@ -260,6 +260,7 @@
       <wsdl:output message="tns:ValidateAPIKeySoapOut" />
     </wsdl:operation>
     <wsdl:operation name="CreateWindowApp">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Creates a new windows application if it doesn't already exist, use the signature as the key</wsdl:documentation>
       <wsdl:input message="tns:CreateWindowAppSoapIn" />
       <wsdl:output message="tns:CreateWindowAppSoapOut" />
     </wsdl:operation>
@@ -274,7 +275,7 @@
       <wsdl:output message="tns:CreateDetailedStatSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="ExactStatUpdateForUser">
-      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Updates a specific stat for a user. Exact values should be passed (i.e. cumlative) for this method</wsdl:documentation>
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Updates a specific stat for a user. Exact values should be passed for this method</wsdl:documentation>
       <wsdl:input message="tns:ExactStatUpdateForUserSoapIn" />
       <wsdl:output message="tns:ExactStatUpdateForUserSoapOut" />
     </wsdl:operation>
@@ -284,14 +285,17 @@
       <wsdl:output message="tns:IncrementStatUpdateForUserSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="AuthenticateUser">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Checks a username and password for a specific user</wsdl:documentation>
       <wsdl:input message="tns:AuthenticateUserSoapIn" />
       <wsdl:output message="tns:AuthenticateUserSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="AddTrophy">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Adds a trophy record into the system, please see online notes about these</wsdl:documentation>
       <wsdl:input message="tns:AddTrophySoapIn" />
       <wsdl:output message="tns:AddTrophySoapOut" />
     </wsdl:operation>
     <wsdl:operation name="ReturnLatestWebServiceVersionAndEndPoint">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns the latest webservice version and the latest end-point if the new version differs greatly from this one</wsdl:documentation>
       <wsdl:input message="tns:ReturnLatestWebServiceVersionAndEndPointSoapIn" />
       <wsdl:output message="tns:ReturnLatestWebServiceVersionAndEndPointSoapOut" />
     </wsdl:operation>

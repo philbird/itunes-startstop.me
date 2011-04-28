@@ -336,27 +336,27 @@ namespace ItunesSSWindows.statdropws {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/AuthenticateUser", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public long AuthenticateUser(string APIKey, string Username, string Password) {
+        public long AuthenticateUser(string APIKey, string EmailAddress, string Password) {
             object[] results = this.Invoke("AuthenticateUser", new object[] {
                         APIKey,
-                        Username,
+                        EmailAddress,
                         Password});
             return ((long)(results[0]));
         }
         
         /// <remarks/>
-        public void AuthenticateUserAsync(string APIKey, string Username, string Password) {
-            this.AuthenticateUserAsync(APIKey, Username, Password, null);
+        public void AuthenticateUserAsync(string APIKey, string EmailAddress, string Password) {
+            this.AuthenticateUserAsync(APIKey, EmailAddress, Password, null);
         }
         
         /// <remarks/>
-        public void AuthenticateUserAsync(string APIKey, string Username, string Password, object userState) {
+        public void AuthenticateUserAsync(string APIKey, string EmailAddress, string Password, object userState) {
             if ((this.AuthenticateUserOperationCompleted == null)) {
                 this.AuthenticateUserOperationCompleted = new System.Threading.SendOrPostCallback(this.OnAuthenticateUserOperationCompleted);
             }
             this.InvokeAsync("AuthenticateUser", new object[] {
                         APIKey,
-                        Username,
+                        EmailAddress,
                         Password}, this.AuthenticateUserOperationCompleted, userState);
         }
         

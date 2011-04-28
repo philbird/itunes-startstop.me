@@ -10,11 +10,20 @@ namespace ItunesSSWindows
 {
     public partial class Form1 : Form
     {
-
+        // Setup a connection to the statdrop webservices
         public statdropws.DeveloperAPI oDevAPI = new statdropws.DeveloperAPI();
+        
+        // Developer APIKEY
         const string APIKey = "1b50f643-fb89-4d5a-8fcf-20ca96deef22";
+        
+        // Release APIKEY - This should be used when creating releases as it only allows non-developer webservice interactions. 
+        const string APIKeyRelease = ""; 
+        
+        // This should be where the itunes XML is when it's found
         public string iTunesXML = ""; 
 
+        // This is the iTunes appID
+        public const Int64 LinkedAppID = 17; 
 
         public Form1()
         {
@@ -62,6 +71,19 @@ namespace ItunesSSWindows
             AddLine(CheckAPIKey().ToString());
             LocateiTunesXML();
             ParseiTunesXML(); 
+        }
+
+        /// <summary>
+        /// This should be hidden from the user, it is used to setup stats. 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnDeveloper_Click(object sender, EventArgs e)
+        {
+            // The startstop.me webservice isn't checking for dupes, so don't rerun this for now, but you can add new stats. 
+           
+            // oDevAPI.CreateDetailedStat(APIKey, "Songs In Library", LinkedAppID, "Number of songs in your iTunes Library",1,1); 
+ 
         }
     }
 }
