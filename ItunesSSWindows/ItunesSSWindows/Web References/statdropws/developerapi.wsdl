@@ -76,7 +76,7 @@
             <s:element minOccurs="1" maxOccurs="1" name="UserID" type="s:long" />
             <s:element minOccurs="1" maxOccurs="1" name="DetailedStatID" type="s:long" />
             <s:element minOccurs="1" maxOccurs="1" name="Count" type="s:long" />
-            <s:element minOccurs="1" maxOccurs="1" name="Percentage" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="Percentage" type="s:decimal" />
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -94,7 +94,7 @@
             <s:element minOccurs="1" maxOccurs="1" name="UserID" type="s:long" />
             <s:element minOccurs="1" maxOccurs="1" name="DetailedStatID" type="s:long" />
             <s:element minOccurs="1" maxOccurs="1" name="Count" type="s:long" />
-            <s:element minOccurs="1" maxOccurs="1" name="Percentage" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="Percentage" type="s:decimal" />
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -275,7 +275,7 @@
       <wsdl:output message="tns:CreateDetailedStatSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="ExactStatUpdateForUser">
-      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Updates a specific stat for a user. Exact values should be passed for this method</wsdl:documentation>
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Updates or creates a specific stat for a user. Exact values should be passed for this method</wsdl:documentation>
       <wsdl:input message="tns:ExactStatUpdateForUserSoapIn" />
       <wsdl:output message="tns:ExactStatUpdateForUserSoapOut" />
     </wsdl:operation>

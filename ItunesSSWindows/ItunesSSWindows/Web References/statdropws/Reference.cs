@@ -262,7 +262,7 @@ namespace ItunesSSWindows.statdropws {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/ExactStatUpdateForUser", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public bool ExactStatUpdateForUser(string APIKey, long UserID, long DetailedStatID, long Count, long Percentage) {
+        public bool ExactStatUpdateForUser(string APIKey, long UserID, long DetailedStatID, long Count, decimal Percentage) {
             object[] results = this.Invoke("ExactStatUpdateForUser", new object[] {
                         APIKey,
                         UserID,
@@ -273,12 +273,12 @@ namespace ItunesSSWindows.statdropws {
         }
         
         /// <remarks/>
-        public void ExactStatUpdateForUserAsync(string APIKey, long UserID, long DetailedStatID, long Count, long Percentage) {
+        public void ExactStatUpdateForUserAsync(string APIKey, long UserID, long DetailedStatID, long Count, decimal Percentage) {
             this.ExactStatUpdateForUserAsync(APIKey, UserID, DetailedStatID, Count, Percentage, null);
         }
         
         /// <remarks/>
-        public void ExactStatUpdateForUserAsync(string APIKey, long UserID, long DetailedStatID, long Count, long Percentage, object userState) {
+        public void ExactStatUpdateForUserAsync(string APIKey, long UserID, long DetailedStatID, long Count, decimal Percentage, object userState) {
             if ((this.ExactStatUpdateForUserOperationCompleted == null)) {
                 this.ExactStatUpdateForUserOperationCompleted = new System.Threading.SendOrPostCallback(this.OnExactStatUpdateForUserOperationCompleted);
             }
@@ -299,7 +299,7 @@ namespace ItunesSSWindows.statdropws {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/IncrementStatUpdateForUser", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public bool IncrementStatUpdateForUser(string APIKey, long UserID, long DetailedStatID, long Count, long Percentage) {
+        public bool IncrementStatUpdateForUser(string APIKey, long UserID, long DetailedStatID, long Count, decimal Percentage) {
             object[] results = this.Invoke("IncrementStatUpdateForUser", new object[] {
                         APIKey,
                         UserID,
@@ -310,12 +310,12 @@ namespace ItunesSSWindows.statdropws {
         }
         
         /// <remarks/>
-        public void IncrementStatUpdateForUserAsync(string APIKey, long UserID, long DetailedStatID, long Count, long Percentage) {
+        public void IncrementStatUpdateForUserAsync(string APIKey, long UserID, long DetailedStatID, long Count, decimal Percentage) {
             this.IncrementStatUpdateForUserAsync(APIKey, UserID, DetailedStatID, Count, Percentage, null);
         }
         
         /// <remarks/>
-        public void IncrementStatUpdateForUserAsync(string APIKey, long UserID, long DetailedStatID, long Count, long Percentage, object userState) {
+        public void IncrementStatUpdateForUserAsync(string APIKey, long UserID, long DetailedStatID, long Count, decimal Percentage, object userState) {
             if ((this.IncrementStatUpdateForUserOperationCompleted == null)) {
                 this.IncrementStatUpdateForUserOperationCompleted = new System.Threading.SendOrPostCallback(this.OnIncrementStatUpdateForUserOperationCompleted);
             }

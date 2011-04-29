@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+using iTunesLib; 
 
 namespace ItunesSSWindows
 {
@@ -15,7 +16,9 @@ namespace ItunesSSWindows
         
         // Developer APIKEY
         const string APIKey = "1b50f643-fb89-4d5a-8fcf-20ca96deef22";
-        
+
+        const Int64 NumberOfTunesInLibraryStatID = 5; 
+
         // Release APIKEY - This should be used when creating releases as it only allows non-developer webservice interactions. 
         const string APIKeyRelease = ""; 
         
@@ -24,7 +27,7 @@ namespace ItunesSSWindows
 
         // This is the iTunes appID
         public const Int64 LinkedAppID = 17; 
-
+       
         public Form1()
         {
             InitializeComponent();
@@ -55,12 +58,44 @@ namespace ItunesSSWindows
         /// </summary>
         public void ParseiTunesXML()
         {
-            // Do some basic counts
+            // We should really access the iTunes XML file, but for now this will. 
+
+             //iTunes classes
+             iTunesAppClass itunes = new iTunesAppClass();
+             IITLibraryPlaylist mainLibrary = itunes.LibraryPlaylist;
+             IITTrackCollection tracks = mainLibrary.Tracks;
+             IITFileOrCDTrack currTrack;
+
+             int _numberOfTracks = tracks.Count; 
+   
 
             // First one should be number of songs in the library. 
 
             // We need a logged in user to add the stats to
+            Int64 _UserID =  oDevAPI.AuthenticateUser(APIKey, txbUserName.Text, txbPassword.Text);
+            if (_UserID != -1)
+            {
+                // The user can be authenticated so now we can add stats
+                
+                oDevAPI.ExactStatUpdateForUser(APIKey, _UserID, NumberOfTunesInLibraryStatID, tracks.Count, 0);
+                AddLine("Updated your startstop.me stats with the number of tracks in your iTunes library"); 
 
+
+                // Here we can go through all the files and update some more stats
+                while (_numberOfTracks != 1)
+                {
+                    // Iterate throught the tracks. 
+                    _numberOfTracks--;
+                    currTrack = tracks[_numberOfTracks] as IITFileOrCDTrack;
+                    
+                }
+                
+
+            }
+            else
+            {
+                AddLine("User cannot be logged in"); 
+            }
 
         }
 
@@ -68,9 +103,15 @@ namespace ItunesSSWindows
 
         private void btnRunStats_Click(object sender, EventArgs e)
         {
-            AddLine(CheckAPIKey().ToString());
-            LocateiTunesXML();
-            ParseiTunesXML(); 
+            if (CheckAPIKey())
+            {
+                // Using the apple COM for now.
+                //LocateiTunesXML();
+
+                ParseiTunesXML();
+            }
+            
+               
         }
 
         /// <summary>

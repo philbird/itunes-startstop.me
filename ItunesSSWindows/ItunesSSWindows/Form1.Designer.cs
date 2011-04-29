@@ -33,6 +33,8 @@
             this.txbUserName = new System.Windows.Forms.TextBox();
             this.txbPassword = new System.Windows.Forms.TextBox();
             this.btnDeveloper = new System.Windows.Forms.Button();
+            this.lblEmailAddress = new System.Windows.Forms.Label();
+            this.lblPassword = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // txbStatus
@@ -55,16 +57,16 @@
             // 
             // txbUserName
             // 
-            this.txbUserName.Location = new System.Drawing.Point(142, 171);
+            this.txbUserName.Location = new System.Drawing.Point(158, 160);
             this.txbUserName.Name = "txbUserName";
-            this.txbUserName.Size = new System.Drawing.Size(100, 20);
+            this.txbUserName.Size = new System.Drawing.Size(372, 20);
             this.txbUserName.TabIndex = 2;
             // 
             // txbPassword
             // 
-            this.txbPassword.Location = new System.Drawing.Point(142, 209);
+            this.txbPassword.Location = new System.Drawing.Point(158, 186);
             this.txbPassword.Name = "txbPassword";
-            this.txbPassword.Size = new System.Drawing.Size(100, 20);
+            this.txbPassword.Size = new System.Drawing.Size(371, 20);
             this.txbPassword.TabIndex = 3;
             // 
             // btnDeveloper
@@ -75,13 +77,34 @@
             this.btnDeveloper.TabIndex = 4;
             this.btnDeveloper.Text = "DeveloperOnly";
             this.btnDeveloper.UseVisualStyleBackColor = true;
+            this.btnDeveloper.Visible = false;
             this.btnDeveloper.Click += new System.EventHandler(this.btnDeveloper_Click);
+            // 
+            // lblEmailAddress
+            // 
+            this.lblEmailAddress.AutoSize = true;
+            this.lblEmailAddress.Location = new System.Drawing.Point(25, 166);
+            this.lblEmailAddress.Name = "lblEmailAddress";
+            this.lblEmailAddress.Size = new System.Drawing.Size(127, 13);
+            this.lblEmailAddress.TabIndex = 5;
+            this.lblEmailAddress.Text = "Registered Email Address";
+            // 
+            // lblPassword
+            // 
+            this.lblPassword.AutoSize = true;
+            this.lblPassword.Location = new System.Drawing.Point(25, 192);
+            this.lblPassword.Name = "lblPassword";
+            this.lblPassword.Size = new System.Drawing.Size(107, 13);
+            this.lblPassword.TabIndex = 6;
+            this.lblPassword.Text = "Registered Password";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(554, 285);
+            this.Controls.Add(this.lblPassword);
+            this.Controls.Add(this.lblEmailAddress);
             this.Controls.Add(this.btnDeveloper);
             this.Controls.Add(this.txbPassword);
             this.Controls.Add(this.txbUserName);
@@ -101,6 +124,8 @@
         private System.Windows.Forms.TextBox txbUserName;
         private System.Windows.Forms.TextBox txbPassword;
         private System.Windows.Forms.Button btnDeveloper;
+        private System.Windows.Forms.Label lblEmailAddress;
+        private System.Windows.Forms.Label lblPassword;
     }
 }
 
