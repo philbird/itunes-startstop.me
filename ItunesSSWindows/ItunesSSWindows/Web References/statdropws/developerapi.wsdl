@@ -77,6 +77,7 @@
             <s:element minOccurs="1" maxOccurs="1" name="DetailedStatID" type="s:long" />
             <s:element minOccurs="1" maxOccurs="1" name="Count" type="s:long" />
             <s:element minOccurs="1" maxOccurs="1" name="Percentage" type="s:decimal" />
+            <s:element minOccurs="0" maxOccurs="1" name="Note" type="s:string" />
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -95,6 +96,7 @@
             <s:element minOccurs="1" maxOccurs="1" name="DetailedStatID" type="s:long" />
             <s:element minOccurs="1" maxOccurs="1" name="Count" type="s:long" />
             <s:element minOccurs="1" maxOccurs="1" name="Percentage" type="s:decimal" />
+            <s:element minOccurs="0" maxOccurs="1" name="Note" type="s:string" />
           </s:sequence>
         </s:complexType>
       </s:element>

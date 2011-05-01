@@ -262,23 +262,24 @@ namespace ItunesSSWindows.statdropws {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/ExactStatUpdateForUser", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public bool ExactStatUpdateForUser(string APIKey, long UserID, long DetailedStatID, long Count, decimal Percentage) {
+        public bool ExactStatUpdateForUser(string APIKey, long UserID, long DetailedStatID, long Count, decimal Percentage, string Note) {
             object[] results = this.Invoke("ExactStatUpdateForUser", new object[] {
                         APIKey,
                         UserID,
                         DetailedStatID,
                         Count,
-                        Percentage});
+                        Percentage,
+                        Note});
             return ((bool)(results[0]));
         }
         
         /// <remarks/>
-        public void ExactStatUpdateForUserAsync(string APIKey, long UserID, long DetailedStatID, long Count, decimal Percentage) {
-            this.ExactStatUpdateForUserAsync(APIKey, UserID, DetailedStatID, Count, Percentage, null);
+        public void ExactStatUpdateForUserAsync(string APIKey, long UserID, long DetailedStatID, long Count, decimal Percentage, string Note) {
+            this.ExactStatUpdateForUserAsync(APIKey, UserID, DetailedStatID, Count, Percentage, Note, null);
         }
         
         /// <remarks/>
-        public void ExactStatUpdateForUserAsync(string APIKey, long UserID, long DetailedStatID, long Count, decimal Percentage, object userState) {
+        public void ExactStatUpdateForUserAsync(string APIKey, long UserID, long DetailedStatID, long Count, decimal Percentage, string Note, object userState) {
             if ((this.ExactStatUpdateForUserOperationCompleted == null)) {
                 this.ExactStatUpdateForUserOperationCompleted = new System.Threading.SendOrPostCallback(this.OnExactStatUpdateForUserOperationCompleted);
             }
@@ -287,7 +288,8 @@ namespace ItunesSSWindows.statdropws {
                         UserID,
                         DetailedStatID,
                         Count,
-                        Percentage}, this.ExactStatUpdateForUserOperationCompleted, userState);
+                        Percentage,
+                        Note}, this.ExactStatUpdateForUserOperationCompleted, userState);
         }
         
         private void OnExactStatUpdateForUserOperationCompleted(object arg) {
@@ -299,23 +301,24 @@ namespace ItunesSSWindows.statdropws {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/IncrementStatUpdateForUser", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public bool IncrementStatUpdateForUser(string APIKey, long UserID, long DetailedStatID, long Count, decimal Percentage) {
+        public bool IncrementStatUpdateForUser(string APIKey, long UserID, long DetailedStatID, long Count, decimal Percentage, string Note) {
             object[] results = this.Invoke("IncrementStatUpdateForUser", new object[] {
                         APIKey,
                         UserID,
                         DetailedStatID,
                         Count,
-                        Percentage});
+                        Percentage,
+                        Note});
             return ((bool)(results[0]));
         }
         
         /// <remarks/>
-        public void IncrementStatUpdateForUserAsync(string APIKey, long UserID, long DetailedStatID, long Count, decimal Percentage) {
-            this.IncrementStatUpdateForUserAsync(APIKey, UserID, DetailedStatID, Count, Percentage, null);
+        public void IncrementStatUpdateForUserAsync(string APIKey, long UserID, long DetailedStatID, long Count, decimal Percentage, string Note) {
+            this.IncrementStatUpdateForUserAsync(APIKey, UserID, DetailedStatID, Count, Percentage, Note, null);
         }
         
         /// <remarks/>
-        public void IncrementStatUpdateForUserAsync(string APIKey, long UserID, long DetailedStatID, long Count, decimal Percentage, object userState) {
+        public void IncrementStatUpdateForUserAsync(string APIKey, long UserID, long DetailedStatID, long Count, decimal Percentage, string Note, object userState) {
             if ((this.IncrementStatUpdateForUserOperationCompleted == null)) {
                 this.IncrementStatUpdateForUserOperationCompleted = new System.Threading.SendOrPostCallback(this.OnIncrementStatUpdateForUserOperationCompleted);
             }
@@ -324,7 +327,8 @@ namespace ItunesSSWindows.statdropws {
                         UserID,
                         DetailedStatID,
                         Count,
-                        Percentage}, this.IncrementStatUpdateForUserOperationCompleted, userState);
+                        Percentage,
+                        Note}, this.IncrementStatUpdateForUserOperationCompleted, userState);
         }
         
         private void OnIncrementStatUpdateForUserOperationCompleted(object arg) {
