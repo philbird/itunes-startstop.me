@@ -42,6 +42,7 @@
             this.txbStatus.Location = new System.Drawing.Point(25, 33);
             this.txbStatus.Multiline = true;
             this.txbStatus.Name = "txbStatus";
+            this.txbStatus.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txbStatus.Size = new System.Drawing.Size(505, 121);
             this.txbStatus.TabIndex = 0;
             // 

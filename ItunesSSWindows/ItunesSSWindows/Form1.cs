@@ -21,7 +21,11 @@ namespace ItunesSSWindows
         const Int64 cMostPlayesOnaSong = 6;
         const Int64 cMostPlayedSong = 7;
         const Int64 cUnplayedTunes = 8;
-        const Int64 cTotalNumberOfPlays = 9; 
+        const Int64 cTotalNumberOfPlays = 9;
+        const Int64 cLastUpdate = 10;
+        const Int64 cTimePlayed = 11;
+        const Int64 cTimeUnPlayed = 12; 
+
 
         // Release APIKEY - This should be used when creating releases as it only allows non-developer webservice interactions. 
         const string APIKeyRelease = ""; 
@@ -94,6 +98,11 @@ namespace ItunesSSWindows
                 // Number of unplayed tracks
                 int _UnplayedTracks = 0; 
 
+                // Total time played
+                TimeSpan oTimeTimePlayed = new TimeSpan(0,0,0);
+                TimeSpan oTimeUnplayed = new TimeSpan(0,0,0); 
+                
+
                 // Here we can go through all the files and update some more stats
                 while (_numberOfTracks != 1)
                 {
@@ -101,19 +110,47 @@ namespace ItunesSSWindows
                     _numberOfTracks--;
                     currTrack = tracks[_numberOfTracks] as IITFileOrCDTrack;
 
-
-                    _TotalNumberOfPlays += currTrack.PlayedCount;
-                    if (currTrack.PlayedCount > _MostPlayedCount)
+                    // Check this is a song
+                    if (currTrack.KindAsString.Contains("audio"))
                     {
-                        _MostPlayedCount = currTrack.PlayedCount;
-                        _MostPlayedTrack = currTrack.Name; 
-                    }
+
+                        _TotalNumberOfPlays += currTrack.PlayedCount;
+
+                        string[] _timeSplit = currTrack.Time.Split(':');
+                        TimeSpan _tracktime = new TimeSpan();
+                        // Minutes and Seconds
+                        if (_timeSplit.Length == 2)
+                        {
+                            
+                            _tracktime = new TimeSpan(0, int.Parse(_timeSplit[1]), int.Parse(_timeSplit[0]));
+                        }
+                        // Hours Minutes and seconds
+                        if (_timeSplit.Length == 3)
+                        {
+                            _tracktime = new TimeSpan(int.Parse(_timeSplit[2]), int.Parse(_timeSplit[1]), int.Parse(_timeSplit[0]));
+                        }
 
 
-                    if (currTrack.Unplayed)
-                    {
-                        _UnplayedTracks++; 
-                    }
+                        if (currTrack.PlayedCount > _MostPlayedCount)
+                        {
+                            _MostPlayedCount = currTrack.PlayedCount;
+                            _MostPlayedTrack = currTrack.Name;
+                        }
+
+
+
+
+
+                        if (currTrack.Unplayed)
+                        {
+                            _UnplayedTracks++;
+                           oTimeUnplayed =  oTimeUnplayed.Add(_tracktime);
+                        }
+                        else
+                        {
+                            oTimeTimePlayed = oTimeTimePlayed.Add(_tracktime);
+                        }
+                    } // end track kind check. 
                 }
 
                 AddLine("Added total number of plays"); 
@@ -123,9 +160,14 @@ namespace ItunesSSWindows
                 AddLine("Most plays on a song"); 
                 oDevAPI.ExactStatUpdateForUser(APIKey, _UserID, cMostPlayesOnaSong, _MostPlayedCount, 0,"");
                 AddLine("Most played song"); 
-                oDevAPI.ExactStatUpdateForUser(APIKey, _UserID, cMostPlayedSong, 0, 0, _MostPlayedTrack); 
+                oDevAPI.ExactStatUpdateForUser(APIKey, _UserID, cMostPlayedSong, 0, 0, _MostPlayedTrack);
+                AddLine("Last Updated");
+                oDevAPI.ExactStatUpdateForUser(APIKey, _UserID,cLastUpdate, 0, 0, DateTime.Now.ToString());
+                AddLine("Amount of Time Played");
+                oDevAPI.ExactStatUpdateForUser(APIKey, _UserID, cTimePlayed, 0, 0, oTimeTimePlayed.Days+"d "+ oTimeTimePlayed.Hours+"h " + oTimeTimePlayed.Minutes+"m");
+                AddLine("Amount of Time Unplayed"); 
+                oDevAPI.ExactStatUpdateForUser(APIKey, _UserID, cTimeUnPlayed, 0, 0, oTimeUnplayed.Days + "d " + oTimeUnplayed.Hours + "h " + oTimeUnplayed.Minutes + "m");
                 
-
             }
             else
             {
@@ -166,7 +208,10 @@ namespace ItunesSSWindows
             oDevAPI.CreateDetailedStat(APIKey, "Number of unplayed tracks", LinkedAppID, "Number of songs which have never been played", 1, 1);
             oDevAPI.CreateDetailedStat(APIKey, "The number of plays", LinkedAppID, "The number of times tracks have been played in total", 1, 1); 
             */
-
+            //oDevAPI.CreateDetailedStat(APIKey, "First time", LinkedAppID, "The date you first uploaded iTunesStats", 1, 1);
+            //oDevAPI.CreateDetailedStat(APIKey, "Last Update", LinkedAppID, "The last time you ran the updater", 1, 1); 
+            //oDevAPI.CreateDetailedStat(APIKey, "Amount of time played", LinkedAppID, "The total amount of time of all the plays", 1, 1);
+            //oDevAPI.CreateDetailedStat(APIKey, "Amount of time unplayed", LinkedAppID, "The amount of time of unplayed tracks", 1, 1);
         }
     }
 }
