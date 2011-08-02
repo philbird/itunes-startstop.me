@@ -12,10 +12,18 @@
       <s:element name="ValidateAPIKeyResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="1" maxOccurs="1" name="ValidateAPIKeyResult" type="s:boolean" />
+            <s:element minOccurs="0" maxOccurs="1" name="ValidateAPIKeyResult" type="tns:ReturnMessage" />
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:complexType name="ReturnMessage">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Success" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="ReturnedID" type="s:long" />
+          <s:element minOccurs="0" maxOccurs="1" name="Message" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="MessageCode" type="s:int" />
+        </s:sequence>
+      </s:complexType>
       <s:element name="CreateWindowApp">
         <s:complexType>
           <s:sequence>
@@ -30,7 +38,7 @@
       <s:element name="CreateWindowAppResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="1" maxOccurs="1" name="CreateWindowAppResult" type="s:boolean" />
+            <s:element minOccurs="0" maxOccurs="1" name="CreateWindowAppResult" type="tns:ReturnMessage" />
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -46,7 +54,7 @@
       <s:element name="CreateGenericAppResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="1" maxOccurs="1" name="CreateGenericAppResult" type="s:boolean" />
+            <s:element minOccurs="0" maxOccurs="1" name="CreateGenericAppResult" type="tns:ReturnMessage" />
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -65,7 +73,7 @@
       <s:element name="CreateDetailedStatResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="1" maxOccurs="1" name="CreateDetailedStatResult" type="s:long" />
+            <s:element minOccurs="0" maxOccurs="1" name="CreateDetailedStatResult" type="tns:ReturnMessage" />
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -84,7 +92,45 @@
       <s:element name="ExactStatUpdateForUserResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="1" maxOccurs="1" name="ExactStatUpdateForUserResult" type="s:boolean" />
+            <s:element minOccurs="0" maxOccurs="1" name="ExactStatUpdateForUserResult" type="tns:ReturnMessage" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ExactStatUpdateForUserWithDayHistory">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="APIKey" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="UserID" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="DetailedStatID" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="Count" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="Percentage" type="s:decimal" />
+            <s:element minOccurs="0" maxOccurs="1" name="Note" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ExactStatUpdateForUserWithDayHistoryResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ExactStatUpdateForUserWithDayHistoryResult" type="tns:ReturnMessage" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ExactStatUpdateForUserWithAllHistory">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="APIKey" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="UserID" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="DetailedStatID" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="Count" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="Percentage" type="s:decimal" />
+            <s:element minOccurs="0" maxOccurs="1" name="Note" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ExactStatUpdateForUserWithAllHistoryResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ExactStatUpdateForUserWithAllHistoryResult" type="tns:ReturnMessage" />
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -103,7 +149,7 @@
       <s:element name="IncrementStatUpdateForUserResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="1" maxOccurs="1" name="IncrementStatUpdateForUserResult" type="s:boolean" />
+            <s:element minOccurs="0" maxOccurs="1" name="IncrementStatUpdateForUserResult" type="tns:ReturnMessage" />
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -119,7 +165,7 @@
       <s:element name="AuthenticateUserResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="1" maxOccurs="1" name="AuthenticateUserResult" type="s:long" />
+            <s:element minOccurs="0" maxOccurs="1" name="AuthenticateUserResult" type="tns:ReturnMessage" />
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -138,17 +184,63 @@
       <s:element name="AddTrophyResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="1" maxOccurs="1" name="AddTrophyResult" type="s:boolean" />
+            <s:element minOccurs="0" maxOccurs="1" name="AddTrophyResult" type="tns:ReturnMessage" />
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="AssociateTrophyToUser">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="APIKey" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="UserID" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="TrophyID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="AwardedOn" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AssociateTrophyToUserResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AssociateTrophyToUserResult" type="tns:ReturnMessage" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReturnUsersTrophyList">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="APIKey" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="UserID" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReturnUsersTrophyListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ReturnUsersTrophyListResult" type="tns:ArrayOfUserTrophy" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfUserTrophy">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="UserTrophy" nillable="true" type="tns:UserTrophy" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="UserTrophy">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="TrophyName" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="TrophyID" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="AwarededOn" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="TrophyDescription" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TrophyAwardCondition" type="s:string" />
+        </s:sequence>
+      </s:complexType>
       <s:element name="ReturnLatestWebServiceVersionAndEndPoint">
         <s:complexType />
       </s:element>
       <s:element name="ReturnLatestWebServiceVersionAndEndPointResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="ReturnLatestWebServiceVersionAndEndPointResult" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ReturnLatestWebServiceVersionAndEndPointResult" type="tns:ReturnMessage" />
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -166,7 +258,7 @@
       <s:element name="SendUserEmailResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="1" maxOccurs="1" name="SendUserEmailResult" type="s:boolean" />
+            <s:element minOccurs="0" maxOccurs="1" name="SendUserEmailResult" type="tns:ReturnMessage" />
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -183,7 +275,7 @@
       <s:element name="SendUserMessageResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="1" maxOccurs="1" name="SendUserMessageResult" type="s:boolean" />
+            <s:element minOccurs="0" maxOccurs="1" name="SendUserMessageResult" type="tns:ReturnMessage" />
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -219,6 +311,18 @@
   <wsdl:message name="ExactStatUpdateForUserSoapOut">
     <wsdl:part name="parameters" element="tns:ExactStatUpdateForUserResponse" />
   </wsdl:message>
+  <wsdl:message name="ExactStatUpdateForUserWithDayHistorySoapIn">
+    <wsdl:part name="parameters" element="tns:ExactStatUpdateForUserWithDayHistory" />
+  </wsdl:message>
+  <wsdl:message name="ExactStatUpdateForUserWithDayHistorySoapOut">
+    <wsdl:part name="parameters" element="tns:ExactStatUpdateForUserWithDayHistoryResponse" />
+  </wsdl:message>
+  <wsdl:message name="ExactStatUpdateForUserWithAllHistorySoapIn">
+    <wsdl:part name="parameters" element="tns:ExactStatUpdateForUserWithAllHistory" />
+  </wsdl:message>
+  <wsdl:message name="ExactStatUpdateForUserWithAllHistorySoapOut">
+    <wsdl:part name="parameters" element="tns:ExactStatUpdateForUserWithAllHistoryResponse" />
+  </wsdl:message>
   <wsdl:message name="IncrementStatUpdateForUserSoapIn">
     <wsdl:part name="parameters" element="tns:IncrementStatUpdateForUser" />
   </wsdl:message>
@@ -236,6 +340,18 @@
   </wsdl:message>
   <wsdl:message name="AddTrophySoapOut">
     <wsdl:part name="parameters" element="tns:AddTrophyResponse" />
+  </wsdl:message>
+  <wsdl:message name="AssociateTrophyToUserSoapIn">
+    <wsdl:part name="parameters" element="tns:AssociateTrophyToUser" />
+  </wsdl:message>
+  <wsdl:message name="AssociateTrophyToUserSoapOut">
+    <wsdl:part name="parameters" element="tns:AssociateTrophyToUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="ReturnUsersTrophyListSoapIn">
+    <wsdl:part name="parameters" element="tns:ReturnUsersTrophyList" />
+  </wsdl:message>
+  <wsdl:message name="ReturnUsersTrophyListSoapOut">
+    <wsdl:part name="parameters" element="tns:ReturnUsersTrophyListResponse" />
   </wsdl:message>
   <wsdl:message name="ReturnLatestWebServiceVersionAndEndPointSoapIn">
     <wsdl:part name="parameters" element="tns:ReturnLatestWebServiceVersionAndEndPoint" />
@@ -281,6 +397,16 @@
       <wsdl:input message="tns:ExactStatUpdateForUserSoapIn" />
       <wsdl:output message="tns:ExactStatUpdateForUserSoapOut" />
     </wsdl:operation>
+    <wsdl:operation name="ExactStatUpdateForUserWithDayHistory">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">(Uses the proper return message)Updates or creates a specific stat for a user. Exact values should be passed for this method. Stores the history by date. I.e. will write a new record for each day or update a record within the day if found</wsdl:documentation>
+      <wsdl:input message="tns:ExactStatUpdateForUserWithDayHistorySoapIn" />
+      <wsdl:output message="tns:ExactStatUpdateForUserWithDayHistorySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ExactStatUpdateForUserWithAllHistory">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">(Uses the proper return message)Updates or creates a specific stat for a user. Exact values should be passed for this method. Stores the history i.e. new records will be added for each update</wsdl:documentation>
+      <wsdl:input message="tns:ExactStatUpdateForUserWithAllHistorySoapIn" />
+      <wsdl:output message="tns:ExactStatUpdateForUserWithAllHistorySoapOut" />
+    </wsdl:operation>
     <wsdl:operation name="IncrementStatUpdateForUser">
       <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Updates a specific stat for a user. Incremental values should be passed for this method, for example '1', will add one to the running total</wsdl:documentation>
       <wsdl:input message="tns:IncrementStatUpdateForUserSoapIn" />
@@ -292,9 +418,19 @@
       <wsdl:output message="tns:AuthenticateUserSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="AddTrophy">
-      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Adds a trophy record into the system, please see online notes about these</wsdl:documentation>
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Adds a trophy record into the system, please see online notes about these, returns -1 if not created or the ID of the trophy</wsdl:documentation>
       <wsdl:input message="tns:AddTrophySoapIn" />
       <wsdl:output message="tns:AddTrophySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AssociateTrophyToUser">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Credits a specific user with a trophy</wsdl:documentation>
+      <wsdl:input message="tns:AssociateTrophyToUserSoapIn" />
+      <wsdl:output message="tns:AssociateTrophyToUserSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReturnUsersTrophyList">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Return a users trophy list</wsdl:documentation>
+      <wsdl:input message="tns:ReturnUsersTrophyListSoapIn" />
+      <wsdl:output message="tns:ReturnUsersTrophyListSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="ReturnLatestWebServiceVersionAndEndPoint">
       <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns the latest webservice version and the latest end-point if the new version differs greatly from this one</wsdl:documentation>
@@ -359,6 +495,24 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="ExactStatUpdateForUserWithDayHistory">
+      <soap:operation soapAction="http://tempuri.org/ExactStatUpdateForUserWithDayHistory" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ExactStatUpdateForUserWithAllHistory">
+      <soap:operation soapAction="http://tempuri.org/ExactStatUpdateForUserWithAllHistory" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="IncrementStatUpdateForUser">
       <soap:operation soapAction="http://tempuri.org/IncrementStatUpdateForUser" style="document" />
       <wsdl:input>
@@ -379,6 +533,24 @@
     </wsdl:operation>
     <wsdl:operation name="AddTrophy">
       <soap:operation soapAction="http://tempuri.org/AddTrophy" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AssociateTrophyToUser">
+      <soap:operation soapAction="http://tempuri.org/AssociateTrophyToUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReturnUsersTrophyList">
+      <soap:operation soapAction="http://tempuri.org/ReturnUsersTrophyList" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -461,6 +633,24 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="ExactStatUpdateForUserWithDayHistory">
+      <soap12:operation soapAction="http://tempuri.org/ExactStatUpdateForUserWithDayHistory" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ExactStatUpdateForUserWithAllHistory">
+      <soap12:operation soapAction="http://tempuri.org/ExactStatUpdateForUserWithAllHistory" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="IncrementStatUpdateForUser">
       <soap12:operation soapAction="http://tempuri.org/IncrementStatUpdateForUser" style="document" />
       <wsdl:input>
@@ -481,6 +671,24 @@
     </wsdl:operation>
     <wsdl:operation name="AddTrophy">
       <soap12:operation soapAction="http://tempuri.org/AddTrophy" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AssociateTrophyToUser">
+      <soap12:operation soapAction="http://tempuri.org/AssociateTrophyToUser" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReturnUsersTrophyList">
+      <soap12:operation soapAction="http://tempuri.org/ReturnUsersTrophyList" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -518,10 +726,10 @@
   </wsdl:binding>
   <wsdl:service name="DeveloperAPI">
     <wsdl:port name="DeveloperAPISoap" binding="tns:DeveloperAPISoap">
-      <soap:address location="http://statdrop.startstop.me/developerapi.asmx" />
+      <soap:address location="http://statdrop.startstop.me/0.2/developerapi.asmx" />
     </wsdl:port>
     <wsdl:port name="DeveloperAPISoap12" binding="tns:DeveloperAPISoap12">
-      <soap12:address location="http://statdrop.startstop.me/developerapi.asmx" />
+      <soap12:address location="http://statdrop.startstop.me/0.2/developerapi.asmx" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

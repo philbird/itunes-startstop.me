@@ -14,6 +14,9 @@ namespace ItunesSSWindows
         // Setup a connection to the statdrop webservices
         public statdropws.DeveloperAPI oDevAPI = new statdropws.DeveloperAPI();
         
+        // Create a return message object to be used
+        public statdropws.ReturnMessage oReturnMessage = new statdropws.ReturnMessage(); 
+
         // Developer APIKEY
         const string APIKey = "1b50f643-fb89-4d5a-8fcf-20ca96deef22";
 
@@ -43,7 +46,8 @@ namespace ItunesSSWindows
 
         public bool CheckAPIKey()
         {
-            return oDevAPI.ValidateAPIKey(APIKey);                
+           oReturnMessage = oDevAPI.ValidateAPIKey(APIKey);
+           return oReturnMessage.Success;  
         }
 
         public void AddLine(string Message)
@@ -80,12 +84,16 @@ namespace ItunesSSWindows
             // First one should be number of songs in the library. 
 
             // We need a logged in user to add the stats to
-            Int64 _UserID =  oDevAPI.AuthenticateUser(APIKey, txbUserName.Text, txbPassword.Text);
-            if (_UserID != -1)
+            oReturnMessage = oDevAPI.AuthenticateUser(APIKey, txbUserName.Text, txbPassword.Text);
+            Int64 _UserID = -1; 
+            
+            if (oReturnMessage.Success)
             {
+                // Since we're reusing the return message, we need to store the userID into it's local variable. 
+                _UserID = oReturnMessage.ReturnedID; 
                 // The user can be authenticated so now we can add stats
                 
-                oDevAPI.ExactStatUpdateForUser(APIKey, _UserID, cNumberOfTunesInLibraryStatID, tracks.Count, 0,"");
+                oReturnMessage = oDevAPI.ExactStatUpdateForUser(APIKey, _UserID, cNumberOfTunesInLibraryStatID, tracks.Count, 0,"");
                 AddLine("Updated your startstop.me stats with the number of tracks in your iTunes library"); 
 
                 // Total number of plays
@@ -153,6 +161,7 @@ namespace ItunesSSWindows
                     } // end track kind check. 
                 }
 
+                #region update the stats with startstop
                 AddLine("Added total number of plays"); 
                 oDevAPI.ExactStatUpdateForUser(APIKey, _UserID, cTotalNumberOfPlays, _TotalNumberOfPlays, 0,"");
                 AddLine("Total number of unplayed"); 
@@ -167,7 +176,7 @@ namespace ItunesSSWindows
                 oDevAPI.ExactStatUpdateForUser(APIKey, _UserID, cTimePlayed, 0, 0, oTimeTimePlayed.Days+"d "+ oTimeTimePlayed.Hours+"h " + oTimeTimePlayed.Minutes+"m");
                 AddLine("Amount of Time Unplayed"); 
                 oDevAPI.ExactStatUpdateForUser(APIKey, _UserID, cTimeUnPlayed, 0, 0, oTimeUnplayed.Days + "d " + oTimeUnplayed.Hours + "h " + oTimeUnplayed.Minutes + "m");
-                
+                #endregion 
             }
             else
             {

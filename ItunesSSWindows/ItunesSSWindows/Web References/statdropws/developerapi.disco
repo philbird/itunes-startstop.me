@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <discovery xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.xmlsoap.org/disco/">
-  <contractRef ref="http://statdrop.startstop.me/developerapi.asmx?wsdl" docRef="http://statdrop.startstop.me/developerapi.asmx" xmlns="http://schemas.xmlsoap.org/disco/scl/" />
-  <soap address="http://statdrop.startstop.me/developerapi.asmx" xmlns:q1="http://tempuri.org/" binding="q1:DeveloperAPISoap" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
-  <soap address="http://statdrop.startstop.me/developerapi.asmx" xmlns:q2="http://tempuri.org/" binding="q2:DeveloperAPISoap12" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+  <contractRef ref="http://statdrop.startstop.me/0.2/developerapi.asmx?wsdl" docRef="http://statdrop.startstop.me/0.2/developerapi.asmx" xmlns="http://schemas.xmlsoap.org/disco/scl/" />
+  <soap address="http://statdrop.startstop.me/0.2/developerapi.asmx" xmlns:q1="http://tempuri.org/" binding="q1:DeveloperAPISoap" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+  <soap address="http://statdrop.startstop.me/0.2/developerapi.asmx" xmlns:q2="http://tempuri.org/" binding="q2:DeveloperAPISoap12" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
 </discovery>

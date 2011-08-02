@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="ItunesSSWindows_statdropws_DeveloperAPI" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">http://statdrop.startstop.me/developerapi.asmx</Value>
+      <Value Profile="(Default)">http://statdrop.startstop.me/0.2/developerapi.asmx</Value>
     </Setting>
   </Settings>
 </SettingsFile>
