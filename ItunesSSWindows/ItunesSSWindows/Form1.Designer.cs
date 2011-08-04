@@ -35,6 +35,7 @@
             this.btnDeveloper = new System.Windows.Forms.Button();
             this.lblEmailAddress = new System.Windows.Forms.Label();
             this.lblPassword = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // txbStatus
@@ -67,6 +68,7 @@
             // 
             this.txbPassword.Location = new System.Drawing.Point(158, 186);
             this.txbPassword.Name = "txbPassword";
+            this.txbPassword.PasswordChar = '*';
             this.txbPassword.Size = new System.Drawing.Size(371, 20);
             this.txbPassword.TabIndex = 3;
             // 
@@ -99,11 +101,21 @@
             this.lblPassword.TabIndex = 6;
             this.lblPassword.Text = "Registered Password";
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(25, 246);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(60, 13);
+            this.label1.TabIndex = 7;
+            this.label1.Text = "Version 0.3";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(554, 285);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.lblPassword);
             this.Controls.Add(this.lblEmailAddress);
             this.Controls.Add(this.btnDeveloper);
@@ -112,7 +124,7 @@
             this.Controls.Add(this.btnRunStats);
             this.Controls.Add(this.txbStatus);
             this.Name = "Form1";
-            this.Text = "ItunesSS";
+            this.Text = "Itunes Stats Updater";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -127,6 +139,7 @@
         private System.Windows.Forms.Button btnDeveloper;
         private System.Windows.Forms.Label lblEmailAddress;
         private System.Windows.Forms.Label lblPassword;
+        private System.Windows.Forms.Label label1;
     }
 }
 

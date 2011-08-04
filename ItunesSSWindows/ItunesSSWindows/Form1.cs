@@ -93,7 +93,7 @@ namespace ItunesSSWindows
                 _UserID = oReturnMessage.ReturnedID; 
                 // The user can be authenticated so now we can add stats
                 
-                oReturnMessage = oDevAPI.ExactStatUpdateForUser(APIKey, _UserID, cNumberOfTunesInLibraryStatID, tracks.Count, 0,"");
+                oReturnMessage = oDevAPI.ExactStatUpdateForUserWithDayHistory(APIKey, _UserID, cNumberOfTunesInLibraryStatID, tracks.Count, 0,"");
                 AddLine("Updated your startstop.me stats with the number of tracks in your iTunes library"); 
 
                 // Total number of plays
@@ -162,20 +162,20 @@ namespace ItunesSSWindows
                 }
 
                 #region update the stats with startstop
-                AddLine("Added total number of plays"); 
-                oDevAPI.ExactStatUpdateForUser(APIKey, _UserID, cTotalNumberOfPlays, _TotalNumberOfPlays, 0,"");
-                AddLine("Total number of unplayed"); 
-                oDevAPI.ExactStatUpdateForUser(APIKey, _UserID, cUnplayedTunes, _UnplayedTracks, 0,"");
-                AddLine("Most plays on a song"); 
-                oDevAPI.ExactStatUpdateForUser(APIKey, _UserID, cMostPlayesOnaSong, _MostPlayedCount, 0,"");
-                AddLine("Most played song"); 
-                oDevAPI.ExactStatUpdateForUser(APIKey, _UserID, cMostPlayedSong, 0, 0, _MostPlayedTrack);
+                AddLine("Added total number of plays");
+                oDevAPI.ExactStatUpdateForUserWithDayHistory(APIKey, _UserID, cTotalNumberOfPlays, _TotalNumberOfPlays, 0, "");
+                AddLine("Total number of unplayed");
+                oDevAPI.ExactStatUpdateForUserWithDayHistory(APIKey, _UserID, cUnplayedTunes, _UnplayedTracks, 0, "");
+                AddLine("Most plays on a song");
+                oDevAPI.ExactStatUpdateForUserWithDayHistory(APIKey, _UserID, cMostPlayesOnaSong, _MostPlayedCount, 0, "");
+                AddLine("Most played song");
+                oDevAPI.ExactStatUpdateForUserWithDayHistory(APIKey, _UserID, cMostPlayedSong, 0, 0, _MostPlayedTrack);
                 AddLine("Last Updated");
-                oDevAPI.ExactStatUpdateForUser(APIKey, _UserID,cLastUpdate, 0, 0, DateTime.Now.ToString());
+                oDevAPI.ExactStatUpdateForUserWithDayHistory(APIKey, _UserID, cLastUpdate, 0, 0, DateTime.Now.ToString());
                 AddLine("Amount of Time Played");
-                oDevAPI.ExactStatUpdateForUser(APIKey, _UserID, cTimePlayed, 0, 0, oTimeTimePlayed.Days+"d "+ oTimeTimePlayed.Hours+"h " + oTimeTimePlayed.Minutes+"m");
-                AddLine("Amount of Time Unplayed"); 
-                oDevAPI.ExactStatUpdateForUser(APIKey, _UserID, cTimeUnPlayed, 0, 0, oTimeUnplayed.Days + "d " + oTimeUnplayed.Hours + "h " + oTimeUnplayed.Minutes + "m");
+                oDevAPI.ExactStatUpdateForUserWithDayHistory(APIKey, _UserID, cTimePlayed, 0, 0, oTimeTimePlayed.Days + "d " + oTimeTimePlayed.Hours + "h " + oTimeTimePlayed.Minutes + "m");
+                AddLine("Amount of Time Unplayed");
+                oDevAPI.ExactStatUpdateForUserWithDayHistory(APIKey, _UserID, cTimeUnPlayed, 0, 0, oTimeUnplayed.Days + "d " + oTimeUnplayed.Hours + "h " + oTimeUnplayed.Minutes + "m");
                 #endregion 
             }
             else
