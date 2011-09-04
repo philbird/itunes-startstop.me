@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "iTunes Startstop Stats Uploader"
-#define MyAppVersion "0.3"
+#define MyAppVersion "1.0.0.1 (build 4)"
 #define MyAppPublisher "startstop"
 #define MyAppURL "http://www.startstop.me/"
 #define MyAppExeName "ItunesSSWindows.exe"
@@ -22,7 +22,7 @@ AppUpdatesURL={#MyAppURL}
 DefaultDirName={pf}\ituness
 DefaultGroupName=iTunes Stats Uploader
 AllowNoIcons=yes
-OutputDir=J:\my data\SVN\itunesss2\Setup Application
+OutputDir=J:\my data\SVN\startstop related\itunesss2\Setup Application
 OutputBaseFilename=setup
 Compression=lzma
 SolidCompression=yes
@@ -34,9 +34,9 @@ Name: "english"; MessagesFile: "compiler:Default.isl"
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
 [Files]
-Source: "J:\my data\SVN\itunesss2\ItunesSSWindows\ItunesSSWindows\bin\Debug\ItunesSSWindows.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "J:\my data\SVN\itunesss2\ItunesSSWindows\ItunesSSWindows\bin\Debug\Interop.iTunesLib.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "J:\my data\SVN\itunesss2\ItunesSSWindows\ItunesSSWindows\bin\Debug\ItunesSSWindows.exe.config"; DestDir: "{app}"; Flags: ignoreversion
+Source: "J:\my data\SVN\startstop related\itunesss2\ItunesSSWindows\ItunesSSWindows\bin\Debug\ItunesSSWindows.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "J:\my data\SVN\startstop related\itunesss2\ItunesSSWindows\ItunesSSWindows\bin\Debug\Interop.iTunesLib.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "J:\my data\SVN\startstop related\itunesss2\ItunesSSWindows\ItunesSSWindows\bin\Debug\ItunesSSWindows.exe.config"; DestDir: "{app}"; Flags: ignoreversion
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]
