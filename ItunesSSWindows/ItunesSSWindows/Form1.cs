@@ -176,6 +176,7 @@ namespace ItunesSSWindows
                 oDevAPI.ExactStatUpdateForUserWithDayHistory(APIKey, _UserID, cTimePlayed, 0, 0, oTimeTimePlayed.Days + "d " + oTimeTimePlayed.Hours + "h " + oTimeTimePlayed.Minutes + "m");
                 AddLine("Amount of Time Unplayed");
                 oDevAPI.ExactStatUpdateForUserWithDayHistory(APIKey, _UserID, cTimeUnPlayed, 0, 0, oTimeUnplayed.Days + "d " + oTimeUnplayed.Hours + "h " + oTimeUnplayed.Minutes + "m");
+                AddLine("All done folks! Visit www.startstop.me to see your stats"); 
                 #endregion 
             }
             else

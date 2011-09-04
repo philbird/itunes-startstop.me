@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<wsdl:definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<wsdl:definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://developerapi.startstop.me/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://developerapi.startstop.me/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
   <wsdl:types>
-    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+    <s:schema elementFormDefault="qualified" targetNamespace="http://developerapi.startstop.me/">
       <s:element name="ValidateAPIKey">
         <s:complexType>
           <s:sequence>
@@ -48,6 +48,10 @@
             <s:element minOccurs="0" maxOccurs="1" name="APIKey" type="s:string" />
             <s:element minOccurs="0" maxOccurs="1" name="ApplicationName" type="s:string" />
             <s:element minOccurs="1" maxOccurs="1" name="ApplicationType" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="LongDescription" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ShortDescription" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="moreInfoURL" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ImgURL" type="s:string" />
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -279,6 +283,53 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="ReturnUserStats">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="APIKey" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="UserID" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="StatID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="StatTypeID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReturnUserStatsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ReturnUserStatsResult" type="tns:ArrayOfUserStats" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfUserStats">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="UserStats" nillable="true" type="tns:UserStats" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="UserStats">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="StatID" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="Count" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="Percent" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="SpecificDate" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="Note" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ReturnUserInformation">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="APIKey" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="UserID" type="s:long" />
+            <s:element minOccurs="0" maxOccurs="1" name="UserInformationRequired" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReturnUserInformationResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ReturnUserInformationResult" type="tns:ReturnMessage" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
     </s:schema>
   </wsdl:types>
   <wsdl:message name="ValidateAPIKeySoapIn">
@@ -371,6 +422,18 @@
   <wsdl:message name="SendUserMessageSoapOut">
     <wsdl:part name="parameters" element="tns:SendUserMessageResponse" />
   </wsdl:message>
+  <wsdl:message name="ReturnUserStatsSoapIn">
+    <wsdl:part name="parameters" element="tns:ReturnUserStats" />
+  </wsdl:message>
+  <wsdl:message name="ReturnUserStatsSoapOut">
+    <wsdl:part name="parameters" element="tns:ReturnUserStatsResponse" />
+  </wsdl:message>
+  <wsdl:message name="ReturnUserInformationSoapIn">
+    <wsdl:part name="parameters" element="tns:ReturnUserInformation" />
+  </wsdl:message>
+  <wsdl:message name="ReturnUserInformationSoapOut">
+    <wsdl:part name="parameters" element="tns:ReturnUserInformationResponse" />
+  </wsdl:message>
   <wsdl:portType name="DeveloperAPISoap">
     <wsdl:operation name="ValidateAPIKey">
       <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Validate the APIKey</wsdl:documentation>
@@ -398,12 +461,12 @@
       <wsdl:output message="tns:ExactStatUpdateForUserSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="ExactStatUpdateForUserWithDayHistory">
-      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">(Uses the proper return message)Updates or creates a specific stat for a user. Exact values should be passed for this method. Stores the history by date. I.e. will write a new record for each day or update a record within the day if found</wsdl:documentation>
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Updates or creates a specific stat for a user. Exact values should be passed for this method. Stores the history by date. I.e. will write a new record for each day or update a record within the day if found</wsdl:documentation>
       <wsdl:input message="tns:ExactStatUpdateForUserWithDayHistorySoapIn" />
       <wsdl:output message="tns:ExactStatUpdateForUserWithDayHistorySoapOut" />
     </wsdl:operation>
     <wsdl:operation name="ExactStatUpdateForUserWithAllHistory">
-      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">(Uses the proper return message)Updates or creates a specific stat for a user. Exact values should be passed for this method. Stores the history i.e. new records will be added for each update</wsdl:documentation>
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Updates or creates a specific stat for a user. Exact values should be passed for this method. Stores the history i.e. new records will be added for each update</wsdl:documentation>
       <wsdl:input message="tns:ExactStatUpdateForUserWithAllHistorySoapIn" />
       <wsdl:output message="tns:ExactStatUpdateForUserWithAllHistorySoapOut" />
     </wsdl:operation>
@@ -423,7 +486,7 @@
       <wsdl:output message="tns:AddTrophySoapOut" />
     </wsdl:operation>
     <wsdl:operation name="AssociateTrophyToUser">
-      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Credits a specific user with a trophy</wsdl:documentation>
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Creates a trophy record for a user</wsdl:documentation>
       <wsdl:input message="tns:AssociateTrophyToUserSoapIn" />
       <wsdl:output message="tns:AssociateTrophyToUserSoapOut" />
     </wsdl:operation>
@@ -447,11 +510,21 @@
       <wsdl:input message="tns:SendUserMessageSoapIn" />
       <wsdl:output message="tns:SendUserMessageSoapOut" />
     </wsdl:operation>
+    <wsdl:operation name="ReturnUserStats">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Return the detailed stats for a user</wsdl:documentation>
+      <wsdl:input message="tns:ReturnUserStatsSoapIn" />
+      <wsdl:output message="tns:ReturnUserStatsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReturnUserInformation">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Return specific user information</wsdl:documentation>
+      <wsdl:input message="tns:ReturnUserInformationSoapIn" />
+      <wsdl:output message="tns:ReturnUserInformationSoapOut" />
+    </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="DeveloperAPISoap" type="tns:DeveloperAPISoap">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
     <wsdl:operation name="ValidateAPIKey">
-      <soap:operation soapAction="http://tempuri.org/ValidateAPIKey" style="document" />
+      <soap:operation soapAction="http://developerapi.startstop.me/ValidateAPIKey" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -460,7 +533,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="CreateWindowApp">
-      <soap:operation soapAction="http://tempuri.org/CreateWindowApp" style="document" />
+      <soap:operation soapAction="http://developerapi.startstop.me/CreateWindowApp" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -469,7 +542,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="CreateGenericApp">
-      <soap:operation soapAction="http://tempuri.org/CreateGenericApp" style="document" />
+      <soap:operation soapAction="http://developerapi.startstop.me/CreateGenericApp" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -478,7 +551,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="CreateDetailedStat">
-      <soap:operation soapAction="http://tempuri.org/CreateDetailedStat" style="document" />
+      <soap:operation soapAction="http://developerapi.startstop.me/CreateDetailedStat" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -487,7 +560,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="ExactStatUpdateForUser">
-      <soap:operation soapAction="http://tempuri.org/ExactStatUpdateForUser" style="document" />
+      <soap:operation soapAction="http://developerapi.startstop.me/ExactStatUpdateForUser" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -496,7 +569,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="ExactStatUpdateForUserWithDayHistory">
-      <soap:operation soapAction="http://tempuri.org/ExactStatUpdateForUserWithDayHistory" style="document" />
+      <soap:operation soapAction="http://developerapi.startstop.me/ExactStatUpdateForUserWithDayHistory" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -505,7 +578,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="ExactStatUpdateForUserWithAllHistory">
-      <soap:operation soapAction="http://tempuri.org/ExactStatUpdateForUserWithAllHistory" style="document" />
+      <soap:operation soapAction="http://developerapi.startstop.me/ExactStatUpdateForUserWithAllHistory" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -514,7 +587,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="IncrementStatUpdateForUser">
-      <soap:operation soapAction="http://tempuri.org/IncrementStatUpdateForUser" style="document" />
+      <soap:operation soapAction="http://developerapi.startstop.me/IncrementStatUpdateForUser" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -523,7 +596,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="AuthenticateUser">
-      <soap:operation soapAction="http://tempuri.org/AuthenticateUser" style="document" />
+      <soap:operation soapAction="http://developerapi.startstop.me/AuthenticateUser" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -532,7 +605,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="AddTrophy">
-      <soap:operation soapAction="http://tempuri.org/AddTrophy" style="document" />
+      <soap:operation soapAction="http://developerapi.startstop.me/AddTrophy" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -541,7 +614,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="AssociateTrophyToUser">
-      <soap:operation soapAction="http://tempuri.org/AssociateTrophyToUser" style="document" />
+      <soap:operation soapAction="http://developerapi.startstop.me/AssociateTrophyToUser" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -550,7 +623,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="ReturnUsersTrophyList">
-      <soap:operation soapAction="http://tempuri.org/ReturnUsersTrophyList" style="document" />
+      <soap:operation soapAction="http://developerapi.startstop.me/ReturnUsersTrophyList" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -559,7 +632,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="ReturnLatestWebServiceVersionAndEndPoint">
-      <soap:operation soapAction="http://tempuri.org/ReturnLatestWebServiceVersionAndEndPoint" style="document" />
+      <soap:operation soapAction="http://developerapi.startstop.me/ReturnLatestWebServiceVersionAndEndPoint" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -568,7 +641,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="SendUserEmail">
-      <soap:operation soapAction="http://tempuri.org/SendUserEmail" style="document" />
+      <soap:operation soapAction="http://developerapi.startstop.me/SendUserEmail" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -577,7 +650,25 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="SendUserMessage">
-      <soap:operation soapAction="http://tempuri.org/SendUserMessage" style="document" />
+      <soap:operation soapAction="http://developerapi.startstop.me/SendUserMessage" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReturnUserStats">
+      <soap:operation soapAction="http://developerapi.startstop.me/ReturnUserStats" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReturnUserInformation">
+      <soap:operation soapAction="http://developerapi.startstop.me/ReturnUserInformation" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -589,7 +680,7 @@
   <wsdl:binding name="DeveloperAPISoap12" type="tns:DeveloperAPISoap">
     <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
     <wsdl:operation name="ValidateAPIKey">
-      <soap12:operation soapAction="http://tempuri.org/ValidateAPIKey" style="document" />
+      <soap12:operation soapAction="http://developerapi.startstop.me/ValidateAPIKey" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -598,7 +689,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="CreateWindowApp">
-      <soap12:operation soapAction="http://tempuri.org/CreateWindowApp" style="document" />
+      <soap12:operation soapAction="http://developerapi.startstop.me/CreateWindowApp" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -607,7 +698,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="CreateGenericApp">
-      <soap12:operation soapAction="http://tempuri.org/CreateGenericApp" style="document" />
+      <soap12:operation soapAction="http://developerapi.startstop.me/CreateGenericApp" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -616,7 +707,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="CreateDetailedStat">
-      <soap12:operation soapAction="http://tempuri.org/CreateDetailedStat" style="document" />
+      <soap12:operation soapAction="http://developerapi.startstop.me/CreateDetailedStat" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -625,7 +716,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="ExactStatUpdateForUser">
-      <soap12:operation soapAction="http://tempuri.org/ExactStatUpdateForUser" style="document" />
+      <soap12:operation soapAction="http://developerapi.startstop.me/ExactStatUpdateForUser" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -634,7 +725,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="ExactStatUpdateForUserWithDayHistory">
-      <soap12:operation soapAction="http://tempuri.org/ExactStatUpdateForUserWithDayHistory" style="document" />
+      <soap12:operation soapAction="http://developerapi.startstop.me/ExactStatUpdateForUserWithDayHistory" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -643,7 +734,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="ExactStatUpdateForUserWithAllHistory">
-      <soap12:operation soapAction="http://tempuri.org/ExactStatUpdateForUserWithAllHistory" style="document" />
+      <soap12:operation soapAction="http://developerapi.startstop.me/ExactStatUpdateForUserWithAllHistory" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -652,7 +743,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="IncrementStatUpdateForUser">
-      <soap12:operation soapAction="http://tempuri.org/IncrementStatUpdateForUser" style="document" />
+      <soap12:operation soapAction="http://developerapi.startstop.me/IncrementStatUpdateForUser" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -661,7 +752,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="AuthenticateUser">
-      <soap12:operation soapAction="http://tempuri.org/AuthenticateUser" style="document" />
+      <soap12:operation soapAction="http://developerapi.startstop.me/AuthenticateUser" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -670,7 +761,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="AddTrophy">
-      <soap12:operation soapAction="http://tempuri.org/AddTrophy" style="document" />
+      <soap12:operation soapAction="http://developerapi.startstop.me/AddTrophy" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -679,7 +770,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="AssociateTrophyToUser">
-      <soap12:operation soapAction="http://tempuri.org/AssociateTrophyToUser" style="document" />
+      <soap12:operation soapAction="http://developerapi.startstop.me/AssociateTrophyToUser" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -688,7 +779,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="ReturnUsersTrophyList">
-      <soap12:operation soapAction="http://tempuri.org/ReturnUsersTrophyList" style="document" />
+      <soap12:operation soapAction="http://developerapi.startstop.me/ReturnUsersTrophyList" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -697,7 +788,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="ReturnLatestWebServiceVersionAndEndPoint">
-      <soap12:operation soapAction="http://tempuri.org/ReturnLatestWebServiceVersionAndEndPoint" style="document" />
+      <soap12:operation soapAction="http://developerapi.startstop.me/ReturnLatestWebServiceVersionAndEndPoint" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -706,7 +797,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="SendUserEmail">
-      <soap12:operation soapAction="http://tempuri.org/SendUserEmail" style="document" />
+      <soap12:operation soapAction="http://developerapi.startstop.me/SendUserEmail" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -715,7 +806,25 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="SendUserMessage">
-      <soap12:operation soapAction="http://tempuri.org/SendUserMessage" style="document" />
+      <soap12:operation soapAction="http://developerapi.startstop.me/SendUserMessage" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReturnUserStats">
+      <soap12:operation soapAction="http://developerapi.startstop.me/ReturnUserStats" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReturnUserInformation">
+      <soap12:operation soapAction="http://developerapi.startstop.me/ReturnUserInformation" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -726,10 +835,10 @@
   </wsdl:binding>
   <wsdl:service name="DeveloperAPI">
     <wsdl:port name="DeveloperAPISoap" binding="tns:DeveloperAPISoap">
-      <soap:address location="http://statdrop.startstop.me/0.2/developerapi.asmx" />
+      <soap:address location="http://developerapi.startstop.me/developerapi.asmx" />
     </wsdl:port>
     <wsdl:port name="DeveloperAPISoap12" binding="tns:DeveloperAPISoap12">
-      <soap12:address location="http://statdrop.startstop.me/0.2/developerapi.asmx" />
+      <soap12:address location="http://developerapi.startstop.me/developerapi.asmx" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

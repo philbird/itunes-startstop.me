@@ -26,7 +26,7 @@ namespace ItunesSSWindows.statdropws {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Web.Services.WebServiceBindingAttribute(Name="DeveloperAPISoap", Namespace="http://tempuri.org/")]
+    [System.Web.Services.WebServiceBindingAttribute(Name="DeveloperAPISoap", Namespace="http://developerapi.startstop.me/")]
     public partial class DeveloperAPI : System.Web.Services.Protocols.SoapHttpClientProtocol {
         
         private System.Threading.SendOrPostCallback ValidateAPIKeyOperationCompleted;
@@ -58,6 +58,10 @@ namespace ItunesSSWindows.statdropws {
         private System.Threading.SendOrPostCallback SendUserEmailOperationCompleted;
         
         private System.Threading.SendOrPostCallback SendUserMessageOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback ReturnUserStatsOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback ReturnUserInformationOperationCompleted;
         
         private bool useDefaultCredentialsSetExplicitly;
         
@@ -143,7 +147,13 @@ namespace ItunesSSWindows.statdropws {
         public event SendUserMessageCompletedEventHandler SendUserMessageCompleted;
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/ValidateAPIKey", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public event ReturnUserStatsCompletedEventHandler ReturnUserStatsCompleted;
+        
+        /// <remarks/>
+        public event ReturnUserInformationCompletedEventHandler ReturnUserInformationCompleted;
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://developerapi.startstop.me/ValidateAPIKey", RequestNamespace="http://developerapi.startstop.me/", ResponseNamespace="http://developerapi.startstop.me/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public ReturnMessage ValidateAPIKey(string APIKey) {
             object[] results = this.Invoke("ValidateAPIKey", new object[] {
                         APIKey});
@@ -172,7 +182,7 @@ namespace ItunesSSWindows.statdropws {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/CreateWindowApp", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://developerapi.startstop.me/CreateWindowApp", RequestNamespace="http://developerapi.startstop.me/", ResponseNamespace="http://developerapi.startstop.me/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public ReturnMessage CreateWindowApp(string APIKey, string Signature, int TypeID, string LongDescription, string MoreInformationURL) {
             object[] results = this.Invoke("CreateWindowApp", new object[] {
                         APIKey,
@@ -209,29 +219,37 @@ namespace ItunesSSWindows.statdropws {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/CreateGenericApp", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public ReturnMessage CreateGenericApp(string APIKey, string ApplicationName, int ApplicationType) {
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://developerapi.startstop.me/CreateGenericApp", RequestNamespace="http://developerapi.startstop.me/", ResponseNamespace="http://developerapi.startstop.me/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public ReturnMessage CreateGenericApp(string APIKey, string ApplicationName, int ApplicationType, string LongDescription, string ShortDescription, string moreInfoURL, string ImgURL) {
             object[] results = this.Invoke("CreateGenericApp", new object[] {
                         APIKey,
                         ApplicationName,
-                        ApplicationType});
+                        ApplicationType,
+                        LongDescription,
+                        ShortDescription,
+                        moreInfoURL,
+                        ImgURL});
             return ((ReturnMessage)(results[0]));
         }
         
         /// <remarks/>
-        public void CreateGenericAppAsync(string APIKey, string ApplicationName, int ApplicationType) {
-            this.CreateGenericAppAsync(APIKey, ApplicationName, ApplicationType, null);
+        public void CreateGenericAppAsync(string APIKey, string ApplicationName, int ApplicationType, string LongDescription, string ShortDescription, string moreInfoURL, string ImgURL) {
+            this.CreateGenericAppAsync(APIKey, ApplicationName, ApplicationType, LongDescription, ShortDescription, moreInfoURL, ImgURL, null);
         }
         
         /// <remarks/>
-        public void CreateGenericAppAsync(string APIKey, string ApplicationName, int ApplicationType, object userState) {
+        public void CreateGenericAppAsync(string APIKey, string ApplicationName, int ApplicationType, string LongDescription, string ShortDescription, string moreInfoURL, string ImgURL, object userState) {
             if ((this.CreateGenericAppOperationCompleted == null)) {
                 this.CreateGenericAppOperationCompleted = new System.Threading.SendOrPostCallback(this.OnCreateGenericAppOperationCompleted);
             }
             this.InvokeAsync("CreateGenericApp", new object[] {
                         APIKey,
                         ApplicationName,
-                        ApplicationType}, this.CreateGenericAppOperationCompleted, userState);
+                        ApplicationType,
+                        LongDescription,
+                        ShortDescription,
+                        moreInfoURL,
+                        ImgURL}, this.CreateGenericAppOperationCompleted, userState);
         }
         
         private void OnCreateGenericAppOperationCompleted(object arg) {
@@ -242,7 +260,7 @@ namespace ItunesSSWindows.statdropws {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/CreateDetailedStat", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://developerapi.startstop.me/CreateDetailedStat", RequestNamespace="http://developerapi.startstop.me/", ResponseNamespace="http://developerapi.startstop.me/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public ReturnMessage CreateDetailedStat(string APIKey, string StatName, long LinkedID, string StatDetailDescription, int TypeOfApplicationID, int TypeOfStat) {
             object[] results = this.Invoke("CreateDetailedStat", new object[] {
                         APIKey,
@@ -281,7 +299,7 @@ namespace ItunesSSWindows.statdropws {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/ExactStatUpdateForUser", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://developerapi.startstop.me/ExactStatUpdateForUser", RequestNamespace="http://developerapi.startstop.me/", ResponseNamespace="http://developerapi.startstop.me/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public ReturnMessage ExactStatUpdateForUser(string APIKey, long UserID, long DetailedStatID, long Count, decimal Percentage, string Note) {
             object[] results = this.Invoke("ExactStatUpdateForUser", new object[] {
                         APIKey,
@@ -320,7 +338,7 @@ namespace ItunesSSWindows.statdropws {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/ExactStatUpdateForUserWithDayHistory", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://developerapi.startstop.me/ExactStatUpdateForUserWithDayHistory", RequestNamespace="http://developerapi.startstop.me/", ResponseNamespace="http://developerapi.startstop.me/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public ReturnMessage ExactStatUpdateForUserWithDayHistory(string APIKey, long UserID, long DetailedStatID, long Count, decimal Percentage, string Note) {
             object[] results = this.Invoke("ExactStatUpdateForUserWithDayHistory", new object[] {
                         APIKey,
@@ -359,7 +377,7 @@ namespace ItunesSSWindows.statdropws {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/ExactStatUpdateForUserWithAllHistory", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://developerapi.startstop.me/ExactStatUpdateForUserWithAllHistory", RequestNamespace="http://developerapi.startstop.me/", ResponseNamespace="http://developerapi.startstop.me/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public ReturnMessage ExactStatUpdateForUserWithAllHistory(string APIKey, long UserID, long DetailedStatID, long Count, decimal Percentage, string Note) {
             object[] results = this.Invoke("ExactStatUpdateForUserWithAllHistory", new object[] {
                         APIKey,
@@ -398,7 +416,7 @@ namespace ItunesSSWindows.statdropws {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/IncrementStatUpdateForUser", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://developerapi.startstop.me/IncrementStatUpdateForUser", RequestNamespace="http://developerapi.startstop.me/", ResponseNamespace="http://developerapi.startstop.me/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public ReturnMessage IncrementStatUpdateForUser(string APIKey, long UserID, long DetailedStatID, long Count, decimal Percentage, string Note) {
             object[] results = this.Invoke("IncrementStatUpdateForUser", new object[] {
                         APIKey,
@@ -437,7 +455,7 @@ namespace ItunesSSWindows.statdropws {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/AuthenticateUser", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://developerapi.startstop.me/AuthenticateUser", RequestNamespace="http://developerapi.startstop.me/", ResponseNamespace="http://developerapi.startstop.me/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public ReturnMessage AuthenticateUser(string APIKey, string EmailAddress, string Password) {
             object[] results = this.Invoke("AuthenticateUser", new object[] {
                         APIKey,
@@ -470,7 +488,7 @@ namespace ItunesSSWindows.statdropws {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/AddTrophy", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://developerapi.startstop.me/AddTrophy", RequestNamespace="http://developerapi.startstop.me/", ResponseNamespace="http://developerapi.startstop.me/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public ReturnMessage AddTrophy(string APIKey, string TrophyName, string TrophyAwardConditionToShowUser, string TrophyDescription, string TriggerSQL, string TriggerReturnValue) {
             object[] results = this.Invoke("AddTrophy", new object[] {
                         APIKey,
@@ -509,7 +527,7 @@ namespace ItunesSSWindows.statdropws {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/AssociateTrophyToUser", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://developerapi.startstop.me/AssociateTrophyToUser", RequestNamespace="http://developerapi.startstop.me/", ResponseNamespace="http://developerapi.startstop.me/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public ReturnMessage AssociateTrophyToUser(string APIKey, long UserID, int TrophyID, System.DateTime AwardedOn) {
             object[] results = this.Invoke("AssociateTrophyToUser", new object[] {
                         APIKey,
@@ -544,7 +562,7 @@ namespace ItunesSSWindows.statdropws {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/ReturnUsersTrophyList", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://developerapi.startstop.me/ReturnUsersTrophyList", RequestNamespace="http://developerapi.startstop.me/", ResponseNamespace="http://developerapi.startstop.me/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public UserTrophy[] ReturnUsersTrophyList(string APIKey, long UserID) {
             object[] results = this.Invoke("ReturnUsersTrophyList", new object[] {
                         APIKey,
@@ -575,7 +593,7 @@ namespace ItunesSSWindows.statdropws {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/ReturnLatestWebServiceVersionAndEndPoint", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://developerapi.startstop.me/ReturnLatestWebServiceVersionAndEndPoint", RequestNamespace="http://developerapi.startstop.me/", ResponseNamespace="http://developerapi.startstop.me/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public ReturnMessage ReturnLatestWebServiceVersionAndEndPoint() {
             object[] results = this.Invoke("ReturnLatestWebServiceVersionAndEndPoint", new object[0]);
             return ((ReturnMessage)(results[0]));
@@ -602,7 +620,7 @@ namespace ItunesSSWindows.statdropws {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/SendUserEmail", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://developerapi.startstop.me/SendUserEmail", RequestNamespace="http://developerapi.startstop.me/", ResponseNamespace="http://developerapi.startstop.me/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public ReturnMessage SendUserEmail(string APIKey, long UserID, string MessageToSend, string MessageFrom, int MessageType) {
             object[] results = this.Invoke("SendUserEmail", new object[] {
                         APIKey,
@@ -639,7 +657,7 @@ namespace ItunesSSWindows.statdropws {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/SendUserMessage", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://developerapi.startstop.me/SendUserMessage", RequestNamespace="http://developerapi.startstop.me/", ResponseNamespace="http://developerapi.startstop.me/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public ReturnMessage SendUserMessage(string APIKey, long UserID, string MessageToSend, string MessageFrom) {
             object[] results = this.Invoke("SendUserMessage", new object[] {
                         APIKey,
@@ -674,6 +692,74 @@ namespace ItunesSSWindows.statdropws {
         }
         
         /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://developerapi.startstop.me/ReturnUserStats", RequestNamespace="http://developerapi.startstop.me/", ResponseNamespace="http://developerapi.startstop.me/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public UserStats[] ReturnUserStats(string APIKey, long UserID, int StatID, int StatTypeID) {
+            object[] results = this.Invoke("ReturnUserStats", new object[] {
+                        APIKey,
+                        UserID,
+                        StatID,
+                        StatTypeID});
+            return ((UserStats[])(results[0]));
+        }
+        
+        /// <remarks/>
+        public void ReturnUserStatsAsync(string APIKey, long UserID, int StatID, int StatTypeID) {
+            this.ReturnUserStatsAsync(APIKey, UserID, StatID, StatTypeID, null);
+        }
+        
+        /// <remarks/>
+        public void ReturnUserStatsAsync(string APIKey, long UserID, int StatID, int StatTypeID, object userState) {
+            if ((this.ReturnUserStatsOperationCompleted == null)) {
+                this.ReturnUserStatsOperationCompleted = new System.Threading.SendOrPostCallback(this.OnReturnUserStatsOperationCompleted);
+            }
+            this.InvokeAsync("ReturnUserStats", new object[] {
+                        APIKey,
+                        UserID,
+                        StatID,
+                        StatTypeID}, this.ReturnUserStatsOperationCompleted, userState);
+        }
+        
+        private void OnReturnUserStatsOperationCompleted(object arg) {
+            if ((this.ReturnUserStatsCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.ReturnUserStatsCompleted(this, new ReturnUserStatsCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://developerapi.startstop.me/ReturnUserInformation", RequestNamespace="http://developerapi.startstop.me/", ResponseNamespace="http://developerapi.startstop.me/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public ReturnMessage ReturnUserInformation(string APIKey, long UserID, string UserInformationRequired) {
+            object[] results = this.Invoke("ReturnUserInformation", new object[] {
+                        APIKey,
+                        UserID,
+                        UserInformationRequired});
+            return ((ReturnMessage)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void ReturnUserInformationAsync(string APIKey, long UserID, string UserInformationRequired) {
+            this.ReturnUserInformationAsync(APIKey, UserID, UserInformationRequired, null);
+        }
+        
+        /// <remarks/>
+        public void ReturnUserInformationAsync(string APIKey, long UserID, string UserInformationRequired, object userState) {
+            if ((this.ReturnUserInformationOperationCompleted == null)) {
+                this.ReturnUserInformationOperationCompleted = new System.Threading.SendOrPostCallback(this.OnReturnUserInformationOperationCompleted);
+            }
+            this.InvokeAsync("ReturnUserInformation", new object[] {
+                        APIKey,
+                        UserID,
+                        UserInformationRequired}, this.ReturnUserInformationOperationCompleted, userState);
+        }
+        
+        private void OnReturnUserInformationOperationCompleted(object arg) {
+            if ((this.ReturnUserInformationCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.ReturnUserInformationCompleted(this, new ReturnUserInformationCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
         public new void CancelAsync(object userState) {
             base.CancelAsync(userState);
         }
@@ -693,11 +779,11 @@ namespace ItunesSSWindows.statdropws {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.1")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.225")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://tempuri.org/")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://developerapi.startstop.me/")]
     public partial class ReturnMessage {
         
         private bool successField;
@@ -750,11 +836,80 @@ namespace ItunesSSWindows.statdropws {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.1")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.225")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://tempuri.org/")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://developerapi.startstop.me/")]
+    public partial class UserStats {
+        
+        private long statIDField;
+        
+        private long countField;
+        
+        private int percentField;
+        
+        private System.DateTime specificDateField;
+        
+        private string noteField;
+        
+        /// <remarks/>
+        public long StatID {
+            get {
+                return this.statIDField;
+            }
+            set {
+                this.statIDField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public long Count {
+            get {
+                return this.countField;
+            }
+            set {
+                this.countField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public int Percent {
+            get {
+                return this.percentField;
+            }
+            set {
+                this.percentField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public System.DateTime SpecificDate {
+            get {
+                return this.specificDateField;
+            }
+            set {
+                this.specificDateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Note {
+            get {
+                return this.noteField;
+            }
+            set {
+                this.noteField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.225")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://developerapi.startstop.me/")]
     public partial class UserTrophy {
         
         private string trophyNameField;
@@ -1195,6 +1350,58 @@ namespace ItunesSSWindows.statdropws {
         private object[] results;
         
         internal SendUserMessageCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public ReturnMessage Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((ReturnMessage)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    public delegate void ReturnUserStatsCompletedEventHandler(object sender, ReturnUserStatsCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class ReturnUserStatsCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal ReturnUserStatsCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public UserStats[] Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((UserStats[])(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    public delegate void ReturnUserInformationCompletedEventHandler(object sender, ReturnUserInformationCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class ReturnUserInformationCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal ReturnUserInformationCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }

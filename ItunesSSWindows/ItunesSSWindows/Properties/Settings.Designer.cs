@@ -26,7 +26,7 @@ namespace ItunesSSWindows.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://statdrop.startstop.me/0.2/developerapi.asmx")]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://developerapi.startstop.me/developerapi.asmx")]
         public string ItunesSSWindows_statdropws_DeveloperAPI {
             get {
                 return ((string)(this["ItunesSSWindows_statdropws_DeveloperAPI"]));
