@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<discovery xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.xmlsoap.org/disco/">
+  <contractRef ref="http://rpcservice.startstop.me/AccessPoint.asmx?wsdl" docRef="http://rpcservice.startstop.me/AccessPoint.asmx" xmlns="http://schemas.xmlsoap.org/disco/scl/" />
+  <soap address="http://rpcservice.startstop.me/AccessPoint.asmx" xmlns:q1="http://startstop.me/" binding="q1:AccessPointSoap" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+  <soap address="http://rpcservice.startstop.me/AccessPoint.asmx" xmlns:q2="http://startstop.me/" binding="q2:AccessPointSoap12" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+</discovery>

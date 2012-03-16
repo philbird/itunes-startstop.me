@@ -11,23 +11,36 @@ namespace ItunesSSWindows
 {
     public partial class Form1 : Form
     {
+
+        #region deprecated services
         // Setup a connection to the statdrop webservices
         public statdropws.DeveloperAPI oDevAPI = new statdropws.DeveloperAPI();
         
         // Create a return message object to be used
-        public statdropws.ReturnMessage oReturnMessage = new statdropws.ReturnMessage(); 
+        public statdropws.ReturnMessage oReturnMessage = new statdropws.ReturnMessage();
+        #endregion 
+
+        #region New WS's
+
+        public startstop.AccessPoint StartStopAccess = new startstop.AccessPoint();
+        public startstop.MessageResponse MessageResponse = new startstop.MessageResponse();
+        public startstop.ValidatedUserInfo ValidatedUserInfo = new startstop.ValidatedUserInfo();
+        public startstop.UserStat UserStat = new startstop.UserStat(); 
+
+        #endregion 
+
 
         // Developer APIKEY
         const string APIKey = "1b50f643-fb89-4d5a-8fcf-20ca96deef22";
 
-        const Int64 cNumberOfTunesInLibraryStatID = 5;
-        const Int64 cMostPlayesOnaSong = 6;
-        const Int64 cMostPlayedSong = 7;
-        const Int64 cUnplayedTunes = 8;
-        const Int64 cTotalNumberOfPlays = 9;
-        const Int64 cLastUpdate = 10;
-        const Int64 cTimePlayed = 11;
-        const Int64 cTimeUnPlayed = 12; 
+        const Guid cNumberOfTunesInLibraryStatID = new Guid("5C79B7C9-A018-4E4E-977E-55303167377F"); 
+        const Guid cMostPlayesOnaSong = new Guid("57109D18-B4D3-4DE8-B3C0-620FA09CEE01"); 
+        const Guid cMostPlayedSong = new Guid("1F07A775-3D3E-4DFD-92CE-AF0443982F8B"); 
+        const Guid cUnplayedTunes = new Guid("2AB00A23-FF5B-4B3E-A757-CA50381D54C3"); 
+        const Guid cTotalNumberOfPlays = new Guid("B90A3777-03B0-4D38-9541-54AB6B6CE155"); 
+        const Guid cLastUpdate = new Guid("67788B2F-D0D0-4F6F-9D73-644A8D5186D5"); 
+        const Guid cTimePlayed = new Guid("3275EEA5-2ED4-48D0-B7D1-966A104076F1");
+        const Guid cTimeUnPlayed = new Guid("7EAC85E1-3C86-408F-ACEE-0E5BBB1D95BE"); 
 
 
         // Release APIKEY - This should be used when creating releases as it only allows non-developer webservice interactions. 

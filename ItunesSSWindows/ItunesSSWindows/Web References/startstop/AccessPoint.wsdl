@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://startstop.me/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:s1="http://microsoft.com/wsdl/types/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://startstop.me/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://startstop.me/">
+      <s:import namespace="http://microsoft.com/wsdl/types/" />
+      <s:element name="LoginUser">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="APIKey" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LoginUserResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="LoginUserResult" type="tns:ValidatedUserInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ValidatedUserInfo">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Validated" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="UserGUID" type="s1:guid" />
+          <s:element minOccurs="1" maxOccurs="1" name="UserID" type="s:long" />
+          <s:element minOccurs="0" maxOccurs="1" name="Username" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="AddStatOverview">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="APIKey" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="oStatOverview" type="tns:StatOverView" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="StatOverView">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="OverviewID" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="OverviewGUID" type="s1:guid" />
+          <s:element minOccurs="0" maxOccurs="1" name="Title" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="CreatedOn" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="ModifiedOn" type="s:dateTime" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="AddStatOverviewResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AddStatOverviewResult" type="tns:MessageResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="MessageResponse">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Success" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="ReturnID" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="ReturnGUID" type="s1:guid" />
+          <s:element minOccurs="0" maxOccurs="1" name="Message" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="AddUserStat">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="APIKey" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="oUserStat" type="tns:UserStat" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="UserStat">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="DetailedStatLogID" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="UserGuid" type="s1:guid" />
+          <s:element minOccurs="1" maxOccurs="1" name="DetailedStatGuid" type="s1:guid" />
+          <s:element minOccurs="1" maxOccurs="1" name="DetailedStatOverviewGUID" type="s1:guid" />
+          <s:element minOccurs="1" maxOccurs="1" name="Count" type="s:long" />
+          <s:element minOccurs="0" maxOccurs="1" name="Note" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Percent" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="SpecificDate" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="LoggedDate" type="s:dateTime" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="AddUserStatResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AddUserStatResult" type="tns:MessageResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://microsoft.com/wsdl/types/">
+      <s:simpleType name="guid">
+        <s:restriction base="s:string">
+          <s:pattern value="[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}" />
+        </s:restriction>
+      </s:simpleType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="LoginUserSoapIn">
+    <wsdl:part name="parameters" element="tns:LoginUser" />
+  </wsdl:message>
+  <wsdl:message name="LoginUserSoapOut">
+    <wsdl:part name="parameters" element="tns:LoginUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="AddStatOverviewSoapIn">
+    <wsdl:part name="parameters" element="tns:AddStatOverview" />
+  </wsdl:message>
+  <wsdl:message name="AddStatOverviewSoapOut">
+    <wsdl:part name="parameters" element="tns:AddStatOverviewResponse" />
+  </wsdl:message>
+  <wsdl:message name="AddUserStatSoapIn">
+    <wsdl:part name="parameters" element="tns:AddUserStat" />
+  </wsdl:message>
+  <wsdl:message name="AddUserStatSoapOut">
+    <wsdl:part name="parameters" element="tns:AddUserStatResponse" />
+  </wsdl:message>
+  <wsdl:portType name="AccessPointSoap">
+    <wsdl:operation name="LoginUser">
+      <wsdl:input message="tns:LoginUserSoapIn" />
+      <wsdl:output message="tns:LoginUserSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddStatOverview">
+      <wsdl:input message="tns:AddStatOverviewSoapIn" />
+      <wsdl:output message="tns:AddStatOverviewSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddUserStat">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Adds or UPDATES the userstat</wsdl:documentation>
+      <wsdl:input message="tns:AddUserStatSoapIn" />
+      <wsdl:output message="tns:AddUserStatSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="AccessPointSoap" type="tns:AccessPointSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="LoginUser">
+      <soap:operation soapAction="http://startstop.me/LoginUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddStatOverview">
+      <soap:operation soapAction="http://startstop.me/AddStatOverview" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddUserStat">
+      <soap:operation soapAction="http://startstop.me/AddUserStat" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="AccessPointSoap12" type="tns:AccessPointSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="LoginUser">
+      <soap12:operation soapAction="http://startstop.me/LoginUser" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddStatOverview">
+      <soap12:operation soapAction="http://startstop.me/AddStatOverview" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddUserStat">
+      <soap12:operation soapAction="http://startstop.me/AddUserStat" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="AccessPoint">
+    <wsdl:port name="AccessPointSoap" binding="tns:AccessPointSoap">
+      <soap:address location="http://rpcservice.startstop.me/AccessPoint.asmx" />
+    </wsdl:port>
+    <wsdl:port name="AccessPointSoap12" binding="tns:AccessPointSoap12">
+      <soap12:address location="http://rpcservice.startstop.me/AccessPoint.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

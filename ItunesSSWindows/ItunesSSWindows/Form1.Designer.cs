@@ -36,6 +36,7 @@
             this.lblEmailAddress = new System.Windows.Forms.Label();
             this.lblPassword = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // txbStatus
@@ -104,17 +105,27 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(25, 246);
+            this.label1.Location = new System.Drawing.Point(22, 237);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(149, 13);
+            this.label1.Size = new System.Drawing.Size(119, 13);
             this.label1.TabIndex = 7;
-            this.label1.Text = "Version 1.0.0.0 (Build 4 Alpha)";
+            this.label1.Text = "Version 1.1.0.0 (Build 5)";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(22, 263);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(88, 13);
+            this.label2.TabIndex = 8;
+            this.label2.Text = "16th March 2012";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(554, 285);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lblPassword);
             this.Controls.Add(this.lblEmailAddress);
@@ -140,6 +151,7 @@
         private System.Windows.Forms.Label lblEmailAddress;
         private System.Windows.Forms.Label lblPassword;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
     }
 }
 
