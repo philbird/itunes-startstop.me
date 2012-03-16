@@ -5,7 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
-using iTunesLib; 
+using iTunesLib;
 
 namespace ItunesSSWindows
 {
@@ -15,57 +15,56 @@ namespace ItunesSSWindows
         #region deprecated services
         // Setup a connection to the statdrop webservices
         public statdropws.DeveloperAPI oDevAPI = new statdropws.DeveloperAPI();
-        
+
         // Create a return message object to be used
         public statdropws.ReturnMessage oReturnMessage = new statdropws.ReturnMessage();
-        #endregion 
+        #endregion
 
         #region New WS's
 
         public startstop.AccessPoint StartStopAccess = new startstop.AccessPoint();
         public startstop.MessageResponse MessageResponse = new startstop.MessageResponse();
         public startstop.ValidatedUserInfo ValidatedUserInfo = new startstop.ValidatedUserInfo();
-        public startstop.UserStat UserStat = new startstop.UserStat(); 
+        public startstop.UserStat UserStat = new startstop.UserStat();
 
-        #endregion 
+        #endregion
 
 
         // Developer APIKEY
         const string APIKey = "1b50f643-fb89-4d5a-8fcf-20ca96deef22";
 
-        const Guid cNumberOfTunesInLibraryStatID = new Guid("5C79B7C9-A018-4E4E-977E-55303167377F"); 
-        const Guid cMostPlayesOnaSong = new Guid("57109D18-B4D3-4DE8-B3C0-620FA09CEE01"); 
-        const Guid cMostPlayedSong = new Guid("1F07A775-3D3E-4DFD-92CE-AF0443982F8B"); 
-        const Guid cUnplayedTunes = new Guid("2AB00A23-FF5B-4B3E-A757-CA50381D54C3"); 
-        const Guid cTotalNumberOfPlays = new Guid("B90A3777-03B0-4D38-9541-54AB6B6CE155"); 
-        const Guid cLastUpdate = new Guid("67788B2F-D0D0-4F6F-9D73-644A8D5186D5"); 
-        const Guid cTimePlayed = new Guid("3275EEA5-2ED4-48D0-B7D1-966A104076F1");
-        const Guid cTimeUnPlayed = new Guid("7EAC85E1-3C86-408F-ACEE-0E5BBB1D95BE"); 
+        public Guid cNumberOfTunesInLibraryStatID = new Guid("5C79B7C9-A018-4E4E-977E-55303167377F");
+        public Guid cMostPlayesOnaSong = new Guid("57109D18-B4D3-4DE8-B3C0-620FA09CEE01");
+        public Guid cMostPlayedSong = new Guid("1F07A775-3D3E-4DFD-92CE-AF0443982F8B");
+        public Guid cUnplayedTunes = new Guid("2AB00A23-FF5B-4B3E-A757-CA50381D54C3");
+        public Guid cTotalNumberOfPlays = new Guid("B90A3777-03B0-4D38-9541-54AB6B6CE155");
+        public Guid cLastUpdate = new Guid("67788B2F-D0D0-4F6F-9D73-644A8D5186D5");
+        public Guid cTimePlayed = new Guid("3275EEA5-2ED4-48D0-B7D1-966A104076F1");
+        public Guid cTimeUnPlayed = new Guid("7EAC85E1-3C86-408F-ACEE-0E5BBB1D95BE");
+
+        // This is the overview GUID for this application stat. 
+        public Guid cStatOverview = new Guid("4C05FE37-EDCF-4315-A249-DEA3E6B4ECF8");
 
 
         // Release APIKEY - This should be used when creating releases as it only allows non-developer webservice interactions. 
-        const string APIKeyRelease = ""; 
-        
+        const string APIKeyRelease = "";
+
         // This should be where the itunes XML is when it's found
-        public string iTunesXML = ""; 
+        public string iTunesXML = "";
 
         // This is the iTunes appID
-        public const Int64 LinkedAppID = 17; 
-       
+        public const Int64 LinkedAppID = 17;
+
         public Form1()
         {
             InitializeComponent();
         }
 
-        public bool CheckAPIKey()
-        {
-           oReturnMessage = oDevAPI.ValidateAPIKey(APIKey);
-           return oReturnMessage.Success;  
-        }
+
 
         public void AddLine(string Message)
         {
-            txbStatus.Text += Message; 
+            txbStatus.Text += Message;
             txbStatus.Text += System.Environment.NewLine;
         }
 
@@ -85,44 +84,41 @@ namespace ItunesSSWindows
         {
             // We should really access the iTunes XML file, but for now this will. 
 
-             //iTunes classes
-             iTunesAppClass itunes = new iTunesAppClass();
-             IITLibraryPlaylist mainLibrary = itunes.LibraryPlaylist;
-             IITTrackCollection tracks = mainLibrary.Tracks;
-             IITFileOrCDTrack currTrack;
+            //iTunes classes
+            iTunesAppClass itunes = new iTunesAppClass();
+            IITLibraryPlaylist mainLibrary = itunes.LibraryPlaylist;
+            IITTrackCollection tracks = mainLibrary.Tracks;
+            IITFileOrCDTrack currTrack;
 
-             int _numberOfTracks = tracks.Count; 
-   
+            int _numberOfTracks = tracks.Count;
 
-            // First one should be number of songs in the library. 
 
-            // We need a logged in user to add the stats to
-            oReturnMessage = oDevAPI.AuthenticateUser(APIKey, txbUserName.Text, txbPassword.Text);
-            Int64 _UserID = -1; 
-            
-            if (oReturnMessage.Success)
+
+            startstop.AccessPoint oAccessPoint = new startstop.AccessPoint();
+            // Validate the user
+
+            ValidatedUserInfo = oAccessPoint.LoginUser(APIKey, txbUserName.Text, txbPassword.Text);
+            // Check to see if the user is validated
+            if (ValidatedUserInfo.Validated) // User details invalid
             {
-                // Since we're reusing the return message, we need to store the userID into it's local variable. 
-                _UserID = oReturnMessage.ReturnedID; 
-                // The user can be authenticated so now we can add stats
-                
-                oReturnMessage = oDevAPI.ExactStatUpdateForUserWithDayHistory(APIKey, _UserID, cNumberOfTunesInLibraryStatID, tracks.Count, 0,"");
-                AddLine("Updated your startstop.me stats with the number of tracks in your iTunes library"); 
+
+                //  oReturnMessage = oDevAPI.ExactStatUpdateForUserWithDayHistory(APIKey, _UserID, cNumberOfTunesInLibraryStatID, tracks.Count, 0,"");
+                AddLine("Updated your startstop.me stats with the number of tracks in your iTunes library");
 
                 // Total number of plays
-                int _TotalNumberOfPlays = 0; 
+                int _TotalNumberOfPlays = 0;
 
                 // The highest played track
                 int _MostPlayedCount = 0;
-                string _MostPlayedTrack = ""; 
+                string _MostPlayedTrack = "";
 
                 // Number of unplayed tracks
-                int _UnplayedTracks = 0; 
+                int _UnplayedTracks = 0;
 
                 // Total time played
-                TimeSpan oTimeTimePlayed = new TimeSpan(0,0,0);
-                TimeSpan oTimeUnplayed = new TimeSpan(0,0,0); 
-                
+                TimeSpan oTimeTimePlayed = new TimeSpan(0, 0, 0);
+                TimeSpan oTimeUnplayed = new TimeSpan(0, 0, 0);
+
 
                 // Here we can go through all the files and update some more stats
                 while (_numberOfTracks != 1)
@@ -142,7 +138,7 @@ namespace ItunesSSWindows
                         // Minutes and Seconds
                         if (_timeSplit.Length == 2)
                         {
-                            
+
                             _tracktime = new TimeSpan(0, int.Parse(_timeSplit[1]), int.Parse(_timeSplit[0]));
                         }
                         // Hours Minutes and seconds
@@ -165,7 +161,7 @@ namespace ItunesSSWindows
                         if (currTrack.Unplayed)
                         {
                             _UnplayedTracks++;
-                           oTimeUnplayed =  oTimeUnplayed.Add(_tracktime);
+                            oTimeUnplayed = oTimeUnplayed.Add(_tracktime);
                         }
                         else
                         {
@@ -176,25 +172,59 @@ namespace ItunesSSWindows
 
                 #region update the stats with startstop
                 AddLine("Added total number of plays");
-                oDevAPI.ExactStatUpdateForUserWithDayHistory(APIKey, _UserID, cTotalNumberOfPlays, _TotalNumberOfPlays, 0, "");
-                AddLine("Total number of unplayed");
-                oDevAPI.ExactStatUpdateForUserWithDayHistory(APIKey, _UserID, cUnplayedTunes, _UnplayedTracks, 0, "");
-                AddLine("Most plays on a song");
-                oDevAPI.ExactStatUpdateForUserWithDayHistory(APIKey, _UserID, cMostPlayesOnaSong, _MostPlayedCount, 0, "");
-                AddLine("Most played song");
-                oDevAPI.ExactStatUpdateForUserWithDayHistory(APIKey, _UserID, cMostPlayedSong, 0, 0, _MostPlayedTrack);
-                AddLine("Last Updated");
-                oDevAPI.ExactStatUpdateForUserWithDayHistory(APIKey, _UserID, cLastUpdate, 0, 0, DateTime.Now.ToString());
-                AddLine("Amount of Time Played");
-                oDevAPI.ExactStatUpdateForUserWithDayHistory(APIKey, _UserID, cTimePlayed, 0, 0, oTimeTimePlayed.Days + "d " + oTimeTimePlayed.Hours + "h " + oTimeTimePlayed.Minutes + "m");
-                AddLine("Amount of Time Unplayed");
-                oDevAPI.ExactStatUpdateForUserWithDayHistory(APIKey, _UserID, cTimeUnPlayed, 0, 0, oTimeUnplayed.Days + "d " + oTimeUnplayed.Hours + "h " + oTimeUnplayed.Minutes + "m");
-                AddLine("All done folks! Visit www.startstop.me to see your stats"); 
-                #endregion 
+
+                startstop.UserStat oStat = new startstop.UserStat();
+
+
+                // we should swap all this rhubarb for a dictionary, it doesn't need to be this complex. That way we can iterate through the dictionary. 
+                // Anyway, for now, this will work. 
+
+                // Total number of plays
+                oStat.Count = _TotalNumberOfPlays;
+                oStat.DetailedStatGuid = cTotalNumberOfPlays;
+                oStat.DetailedStatOverviewGUID = cStatOverview;
+                oStat.UserGuid = ValidatedUserInfo.UserGUID;
+                oStat.Note = ""; 
+                oAccessPoint.AddUserStat(APIKey, oStat);
+
+                // Unplayed tracks
+                oStat = new startstop.UserStat();
+                oStat.Count = _UnplayedTracks;
+                oStat.DetailedStatGuid = cUnplayedTunes;
+                oStat.DetailedStatOverviewGUID = cStatOverview;
+                oStat.UserGuid = ValidatedUserInfo.UserGUID;
+                oAccessPoint.AddUserStat(APIKey, oStat);
+
+                // Most played tracks
+                oStat = new startstop.UserStat();
+                oStat.Count = _MostPlayedCount;
+                oStat.DetailedStatGuid = cMostPlayesOnaSong;
+                oStat.DetailedStatOverviewGUID = cStatOverview;
+                oStat.UserGuid = ValidatedUserInfo.UserGUID;
+                oAccessPoint.AddUserStat(APIKey, oStat);
+
+
+                /*
+               oDevAPI.ExactStatUpdateForUserWithDayHistory(APIKey, _UserID, cTotalNumberOfPlays, _TotalNumberOfPlays, 0, "");
+               AddLine("Total number of unplayed");
+               oDevAPI.ExactStatUpdateForUserWithDayHistory(APIKey, _UserID, cUnplayedTunes, _UnplayedTracks, 0, "");
+               AddLine("Most plays on a song");
+               oDevAPI.ExactStatUpdateForUserWithDayHistory(APIKey, _UserID, cMostPlayesOnaSong, _MostPlayedCount, 0, "");
+               AddLine("Most played song");
+               oDevAPI.ExactStatUpdateForUserWithDayHistory(APIKey, _UserID, cMostPlayedSong, 0, 0, _MostPlayedTrack);
+               AddLine("Last Updated");
+               oDevAPI.ExactStatUpdateForUserWithDayHistory(APIKey, _UserID, cLastUpdate, 0, 0, DateTime.Now.ToString());
+               AddLine("Amount of Time Played");
+               oDevAPI.ExactStatUpdateForUserWithDayHistory(APIKey, _UserID, cTimePlayed, 0, 0, oTimeTimePlayed.Days + "d " + oTimeTimePlayed.Hours + "h " + oTimeTimePlayed.Minutes + "m");
+               AddLine("Amount of Time Unplayed");
+               oDevAPI.ExactStatUpdateForUserWithDayHistory(APIKey, _UserID, cTimeUnPlayed, 0, 0, oTimeUnplayed.Days + "d " + oTimeUnplayed.Hours + "h " + oTimeUnplayed.Minutes + "m");
+                 */
+                AddLine("All done folks! Visit www.startstop.me to see your stats");
+                #endregion
             }
             else
             {
-                AddLine("User cannot be logged in"); 
+                AddLine("User cannot be logged in");
             }
 
         }
@@ -203,15 +233,11 @@ namespace ItunesSSWindows
 
         private void btnRunStats_Click(object sender, EventArgs e)
         {
-            if (CheckAPIKey())
-            {
-                // Using the apple COM for now.
-                //LocateiTunesXML();
 
-                ParseiTunesXML();
-            }
-            
-               
+
+            ParseiTunesXML();
+
+
         }
 
         /// <summary>
@@ -221,20 +247,7 @@ namespace ItunesSSWindows
         /// <param name="e"></param>
         private void btnDeveloper_Click(object sender, EventArgs e)
         {
-            // The startstop.me webservice isn't checking for dupes, so don't rerun this for now, but you can add new stats. 
-           
-            /*
-            oDevAPI.CreateDetailedStat(APIKey, "Songs In Library", LinkedAppID, "Number of songs in your iTunes Library",1,1); 
-
-            oDevAPI.CreateDetailedStat(APIKey, "Most plays on a song", LinkedAppID, "The song with the most plays", 1, 1);
-            oDevAPI.CreateDetailedStat(APIKey, "Most played song", LinkedAppID, "The song with the most plays", 1, 1);
-            oDevAPI.CreateDetailedStat(APIKey, "Number of unplayed tracks", LinkedAppID, "Number of songs which have never been played", 1, 1);
-            oDevAPI.CreateDetailedStat(APIKey, "The number of plays", LinkedAppID, "The number of times tracks have been played in total", 1, 1); 
-            */
-            //oDevAPI.CreateDetailedStat(APIKey, "First time", LinkedAppID, "The date you first uploaded iTunesStats", 1, 1);
-            //oDevAPI.CreateDetailedStat(APIKey, "Last Update", LinkedAppID, "The last time you ran the updater", 1, 1); 
-            //oDevAPI.CreateDetailedStat(APIKey, "Amount of time played", LinkedAppID, "The total amount of time of all the plays", 1, 1);
-            //oDevAPI.CreateDetailedStat(APIKey, "Amount of time unplayed", LinkedAppID, "The amount of time of unplayed tracks", 1, 1);
+            // This has all been removed. To add and manage stats, we're using an online development portal.
         }
     }
 }
