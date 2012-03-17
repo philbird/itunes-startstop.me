@@ -32,7 +32,6 @@
             this.btnRunStats = new System.Windows.Forms.Button();
             this.txbUserName = new System.Windows.Forms.TextBox();
             this.txbPassword = new System.Windows.Forms.TextBox();
-            this.btnDeveloper = new System.Windows.Forms.Button();
             this.lblEmailAddress = new System.Windows.Forms.Label();
             this.lblPassword = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -73,17 +72,6 @@
             this.txbPassword.Size = new System.Drawing.Size(371, 20);
             this.txbPassword.TabIndex = 3;
             // 
-            // btnDeveloper
-            // 
-            this.btnDeveloper.Location = new System.Drawing.Point(321, 237);
-            this.btnDeveloper.Name = "btnDeveloper";
-            this.btnDeveloper.Size = new System.Drawing.Size(101, 23);
-            this.btnDeveloper.TabIndex = 4;
-            this.btnDeveloper.Text = "DeveloperOnly";
-            this.btnDeveloper.UseVisualStyleBackColor = true;
-            this.btnDeveloper.Visible = false;
-            this.btnDeveloper.Click += new System.EventHandler(this.btnDeveloper_Click);
-            // 
             // lblEmailAddress
             // 
             this.lblEmailAddress.AutoSize = true;
@@ -109,7 +97,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(119, 13);
             this.label1.TabIndex = 7;
-            this.label1.Text = "Version 1.1.0.0 (Build 5)";
+            this.label1.Text = "Version 1.1.0.0 (Build 6)";
             // 
             // label2
             // 
@@ -118,7 +106,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(88, 13);
             this.label2.TabIndex = 8;
-            this.label2.Text = "16th March 2012";
+            this.label2.Text = "17th March 2012";
             // 
             // Form1
             // 
@@ -129,7 +117,6 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lblPassword);
             this.Controls.Add(this.lblEmailAddress);
-            this.Controls.Add(this.btnDeveloper);
             this.Controls.Add(this.txbPassword);
             this.Controls.Add(this.txbUserName);
             this.Controls.Add(this.btnRunStats);
@@ -147,7 +134,6 @@
         private System.Windows.Forms.Button btnRunStats;
         private System.Windows.Forms.TextBox txbUserName;
         private System.Windows.Forms.TextBox txbPassword;
-        private System.Windows.Forms.Button btnDeveloper;
         private System.Windows.Forms.Label lblEmailAddress;
         private System.Windows.Forms.Label lblPassword;
         private System.Windows.Forms.Label label1;

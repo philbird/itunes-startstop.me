@@ -12,13 +12,7 @@ namespace ItunesSSWindows
     public partial class Form1 : Form
     {
 
-        #region deprecated services
-        // Setup a connection to the statdrop webservices
-        public statdropws.DeveloperAPI oDevAPI = new statdropws.DeveloperAPI();
-
-        // Create a return message object to be used
-        public statdropws.ReturnMessage oReturnMessage = new statdropws.ReturnMessage();
-        #endregion
+       
 
         #region New WS's
 
@@ -82,6 +76,14 @@ namespace ItunesSSWindows
         /// </summary>
         public void ParseiTunesXML()
         {
+            startstop.AccessPoint oAccessPoint = new startstop.AccessPoint();
+            // Validate the user
+
+            ValidatedUserInfo = oAccessPoint.LoginUser(APIKey, txbUserName.Text, txbPassword.Text);
+            // Check to see if the user is validated
+            if (ValidatedUserInfo.Validated) // User details invalid
+            {
+            
             // We should really access the iTunes XML file, but for now this will. 
 
             //iTunes classes
@@ -93,14 +95,15 @@ namespace ItunesSSWindows
             int _numberOfTracks = tracks.Count;
 
 
+            startstop.UserStat oStat = new startstop.UserStat();
+            // Total number of tracks (This is done here, because, well, we decrement the number of tracks)
+            oStat = new startstop.UserStat();
+            oStat.Count = _numberOfTracks;
+            oStat.DetailedStatGuid = cNumberOfTunesInLibraryStatID;
+            oStat.DetailedStatOverviewGUID = cStatOverview;
+            oStat.UserGuid = ValidatedUserInfo.UserGUID;
+            oAccessPoint.AddUserStat(APIKey, oStat); 
 
-            startstop.AccessPoint oAccessPoint = new startstop.AccessPoint();
-            // Validate the user
-
-            ValidatedUserInfo = oAccessPoint.LoginUser(APIKey, txbUserName.Text, txbPassword.Text);
-            // Check to see if the user is validated
-            if (ValidatedUserInfo.Validated) // User details invalid
-            {
 
                 //  oReturnMessage = oDevAPI.ExactStatUpdateForUserWithDayHistory(APIKey, _UserID, cNumberOfTunesInLibraryStatID, tracks.Count, 0,"");
                 AddLine("Updated your startstop.me stats with the number of tracks in your iTunes library");
@@ -173,13 +176,15 @@ namespace ItunesSSWindows
                 #region update the stats with startstop
                 AddLine("Added total number of plays");
 
-                startstop.UserStat oStat = new startstop.UserStat();
 
 
                 // we should swap all this rhubarb for a dictionary, it doesn't need to be this complex. That way we can iterate through the dictionary. 
                 // Anyway, for now, this will work. 
 
+              
+
                 // Total number of plays
+                oStat = new startstop.UserStat(); 
                 oStat.Count = _TotalNumberOfPlays;
                 oStat.DetailedStatGuid = cTotalNumberOfPlays;
                 oStat.DetailedStatOverviewGUID = cStatOverview;
@@ -203,21 +208,32 @@ namespace ItunesSSWindows
                 oStat.UserGuid = ValidatedUserInfo.UserGUID;
                 oAccessPoint.AddUserStat(APIKey, oStat);
 
+                // Amount of time played
+                oStat = new startstop.UserStat();
+                oStat.Count = 0;
+                oStat.Note = oTimeTimePlayed.Days + "d " + oTimeTimePlayed.Hours + "h " + oTimeTimePlayed.Minutes + "m";
+                oStat.DetailedStatGuid = cTimePlayed; 
+                oStat.DetailedStatOverviewGUID = cStatOverview;
+                oStat.UserGuid = ValidatedUserInfo.UserGUID;
+                oAccessPoint.AddUserStat(APIKey, oStat);
+
+
+                // Amount of time played
+                oStat = new startstop.UserStat();
+                oStat.Count = 0;
+                oStat.Note = oTimeUnplayed.Days + "d " + oTimeUnplayed.Hours + "h " + oTimeUnplayed.Minutes + "m";
+                oStat.DetailedStatGuid = cTimeUnPlayed; 
+                oStat.DetailedStatOverviewGUID = cStatOverview;
+                oStat.UserGuid = ValidatedUserInfo.UserGUID;
+                oAccessPoint.AddUserStat(APIKey, oStat);
 
                 /*
-               oDevAPI.ExactStatUpdateForUserWithDayHistory(APIKey, _UserID, cTotalNumberOfPlays, _TotalNumberOfPlays, 0, "");
-               AddLine("Total number of unplayed");
-               oDevAPI.ExactStatUpdateForUserWithDayHistory(APIKey, _UserID, cUnplayedTunes, _UnplayedTracks, 0, "");
-               AddLine("Most plays on a song");
-               oDevAPI.ExactStatUpdateForUserWithDayHistory(APIKey, _UserID, cMostPlayesOnaSong, _MostPlayedCount, 0, "");
+               
                AddLine("Most played song");
                oDevAPI.ExactStatUpdateForUserWithDayHistory(APIKey, _UserID, cMostPlayedSong, 0, 0, _MostPlayedTrack);
                AddLine("Last Updated");
                oDevAPI.ExactStatUpdateForUserWithDayHistory(APIKey, _UserID, cLastUpdate, 0, 0, DateTime.Now.ToString());
-               AddLine("Amount of Time Played");
-               oDevAPI.ExactStatUpdateForUserWithDayHistory(APIKey, _UserID, cTimePlayed, 0, 0, oTimeTimePlayed.Days + "d " + oTimeTimePlayed.Hours + "h " + oTimeTimePlayed.Minutes + "m");
-               AddLine("Amount of Time Unplayed");
-               oDevAPI.ExactStatUpdateForUserWithDayHistory(APIKey, _UserID, cTimeUnPlayed, 0, 0, oTimeUnplayed.Days + "d " + oTimeUnplayed.Hours + "h " + oTimeUnplayed.Minutes + "m");
+               
                  */
                 AddLine("All done folks! Visit www.startstop.me to see your stats");
                 #endregion
@@ -225,6 +241,7 @@ namespace ItunesSSWindows
             else
             {
                 AddLine("User cannot be logged in");
+                MessageBox.Show("Sorry your login details aren't correct"); 
             }
 
         }
@@ -233,21 +250,11 @@ namespace ItunesSSWindows
 
         private void btnRunStats_Click(object sender, EventArgs e)
         {
-
+            // We should really ask for a login here, before we attempt to PArse the lib.
 
             ParseiTunesXML();
-
-
         }
 
-        /// <summary>
-        /// This should be hidden from the user, it is used to setup stats. 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void btnDeveloper_Click(object sender, EventArgs e)
-        {
-            // This has all been removed. To add and manage stats, we're using an online development portal.
-        }
+      
     }
 }
