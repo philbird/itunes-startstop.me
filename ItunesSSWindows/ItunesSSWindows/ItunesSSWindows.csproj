@@ -84,11 +84,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
-    <Compile Include="Web References\statdropws\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.map</DependentUpon>
-    </Compile>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -122,36 +117,11 @@
     <None Include="Web References\startstop\ValidatedUserInfo.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
-    <None Include="Web References\statdropws\developerapi.wsdl" />
-    <None Include="Web References\statdropws\Reference.map">
-      <Generator>MSDiscoCodeGenerator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-    <None Include="Web References\statdropws\ReturnMessage1.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </None>
-    <None Include="Web References\statdropws\UserStats.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </None>
-    <None Include="Web References\statdropws\UserTrophy1.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <WebReferences Include="Web References\" />
   </ItemGroup>
   <ItemGroup>
-    <WebReferenceUrl Include="http://developerapi.startstop.me/developerapi.asmx">
-      <UrlBehavior>Dynamic</UrlBehavior>
-      <RelPath>Web References\statdropws\</RelPath>
-      <UpdateFromURL>http://developerapi.startstop.me/developerapi.asmx</UpdateFromURL>
-      <ServiceLocationURL>
-      </ServiceLocationURL>
-      <CachedDynamicPropName>
-      </CachedDynamicPropName>
-      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
-      <CachedSettingsPropName>ItunesSSWindows_statdropws_DeveloperAPI</CachedSettingsPropName>
-    </WebReferenceUrl>
     <WebReferenceUrl Include="http://rpcservice.startstop.me/AccessPoint.asmx">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\startstop\</RelPath>
@@ -163,9 +133,6 @@
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>ItunesSSWindows_startstop_AccessPoint</CachedSettingsPropName>
     </WebReferenceUrl>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Web References\statdropws\developerapi.disco" />
   </ItemGroup>
   <ItemGroup>
     <COMReference Include="iTunesLib">

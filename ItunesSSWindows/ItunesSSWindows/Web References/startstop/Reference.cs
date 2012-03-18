@@ -35,6 +35,8 @@ namespace ItunesSSWindows.startstop {
         
         private System.Threading.SendOrPostCallback AddUserStatOperationCompleted;
         
+        private System.Threading.SendOrPostCallback AddUserStatMusicOperationCompleted;
+        
         private bool useDefaultCredentialsSetExplicitly;
         
         /// <remarks/>
@@ -81,6 +83,9 @@ namespace ItunesSSWindows.startstop {
         
         /// <remarks/>
         public event AddUserStatCompletedEventHandler AddUserStatCompleted;
+        
+        /// <remarks/>
+        public event AddUserStatMusicCompletedEventHandler AddUserStatMusicCompleted;
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://startstop.me/LoginUser", RequestNamespace="http://startstop.me/", ResponseNamespace="http://startstop.me/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
@@ -148,7 +153,7 @@ namespace ItunesSSWindows.startstop {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://startstop.me/AddUserStat", RequestNamespace="http://startstop.me/", ResponseNamespace="http://startstop.me/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public MessageResponse AddUserStat(string APIKey, UserStat oUserStat) {
+        public MessageResponse AddUserStat(string APIKey, UserStatLog oUserStat) {
             object[] results = this.Invoke("AddUserStat", new object[] {
                         APIKey,
                         oUserStat});
@@ -156,12 +161,12 @@ namespace ItunesSSWindows.startstop {
         }
         
         /// <remarks/>
-        public void AddUserStatAsync(string APIKey, UserStat oUserStat) {
+        public void AddUserStatAsync(string APIKey, UserStatLog oUserStat) {
             this.AddUserStatAsync(APIKey, oUserStat, null);
         }
         
         /// <remarks/>
-        public void AddUserStatAsync(string APIKey, UserStat oUserStat, object userState) {
+        public void AddUserStatAsync(string APIKey, UserStatLog oUserStat, object userState) {
             if ((this.AddUserStatOperationCompleted == null)) {
                 this.AddUserStatOperationCompleted = new System.Threading.SendOrPostCallback(this.OnAddUserStatOperationCompleted);
             }
@@ -174,6 +179,39 @@ namespace ItunesSSWindows.startstop {
             if ((this.AddUserStatCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.AddUserStatCompleted(this, new AddUserStatCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://startstop.me/AddUserStatMusic", RequestNamespace="http://startstop.me/", ResponseNamespace="http://startstop.me/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public MessageResponse AddUserStatMusic(string APIKey, UserStatLog oUserStat, AudioContent oAudioContent) {
+            object[] results = this.Invoke("AddUserStatMusic", new object[] {
+                        APIKey,
+                        oUserStat,
+                        oAudioContent});
+            return ((MessageResponse)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void AddUserStatMusicAsync(string APIKey, UserStatLog oUserStat, AudioContent oAudioContent) {
+            this.AddUserStatMusicAsync(APIKey, oUserStat, oAudioContent, null);
+        }
+        
+        /// <remarks/>
+        public void AddUserStatMusicAsync(string APIKey, UserStatLog oUserStat, AudioContent oAudioContent, object userState) {
+            if ((this.AddUserStatMusicOperationCompleted == null)) {
+                this.AddUserStatMusicOperationCompleted = new System.Threading.SendOrPostCallback(this.OnAddUserStatMusicOperationCompleted);
+            }
+            this.InvokeAsync("AddUserStatMusic", new object[] {
+                        APIKey,
+                        oUserStat,
+                        oAudioContent}, this.AddUserStatMusicOperationCompleted, userState);
+        }
+        
+        private void OnAddUserStatMusicOperationCompleted(object arg) {
+            if ((this.AddUserStatMusicCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.AddUserStatMusicCompleted(this, new AddUserStatMusicCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -211,6 +249,8 @@ namespace ItunesSSWindows.startstop {
         private long userIDField;
         
         private string usernameField;
+        
+        private string emailAddressField;
         
         /// <remarks/>
         public bool Validated {
@@ -251,6 +291,16 @@ namespace ItunesSSWindows.startstop {
                 this.usernameField = value;
             }
         }
+        
+        /// <remarks/>
+        public string EmailAddress {
+            get {
+                return this.emailAddressField;
+            }
+            set {
+                this.emailAddressField = value;
+            }
+        }
     }
     
     /// <remarks/>
@@ -259,7 +309,148 @@ namespace ItunesSSWindows.startstop {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://startstop.me/")]
-    public partial class UserStat {
+    public partial class AudioContent {
+        
+        private long audioContentIDField;
+        
+        private System.Guid audioContentGUIDField;
+        
+        private string songTitleField;
+        
+        private string albumnTitleField;
+        
+        private string genreField;
+        
+        private int ratingField;
+        
+        private string notesField;
+        
+        private System.DateTime yearField;
+        
+        private System.DateTime createdOnField;
+        
+        private System.DateTime modifiedOnField;
+        
+        private long reportingUserIDField;
+        
+        /// <remarks/>
+        public long AudioContentID {
+            get {
+                return this.audioContentIDField;
+            }
+            set {
+                this.audioContentIDField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public System.Guid AudioContentGUID {
+            get {
+                return this.audioContentGUIDField;
+            }
+            set {
+                this.audioContentGUIDField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string SongTitle {
+            get {
+                return this.songTitleField;
+            }
+            set {
+                this.songTitleField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string AlbumnTitle {
+            get {
+                return this.albumnTitleField;
+            }
+            set {
+                this.albumnTitleField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Genre {
+            get {
+                return this.genreField;
+            }
+            set {
+                this.genreField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public int Rating {
+            get {
+                return this.ratingField;
+            }
+            set {
+                this.ratingField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Notes {
+            get {
+                return this.notesField;
+            }
+            set {
+                this.notesField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public System.DateTime Year {
+            get {
+                return this.yearField;
+            }
+            set {
+                this.yearField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public System.DateTime CreatedOn {
+            get {
+                return this.createdOnField;
+            }
+            set {
+                this.createdOnField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public System.DateTime ModifiedOn {
+            get {
+                return this.modifiedOnField;
+            }
+            set {
+                this.modifiedOnField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public long ReportingUserID {
+            get {
+                return this.reportingUserIDField;
+            }
+            set {
+                this.reportingUserIDField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.233")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://startstop.me/")]
+    public partial class UserStatLog {
         
         private long detailedStatLogIDField;
         
@@ -278,6 +469,10 @@ namespace ItunesSSWindows.startstop {
         private System.DateTime specificDateField;
         
         private System.DateTime loggedDateField;
+        
+        private long audioContentIDField;
+        
+        private long userStatRankField;
         
         /// <remarks/>
         public long DetailedStatLogID {
@@ -368,6 +563,26 @@ namespace ItunesSSWindows.startstop {
                 this.loggedDateField = value;
             }
         }
+        
+        /// <remarks/>
+        public long AudioContentID {
+            get {
+                return this.audioContentIDField;
+            }
+            set {
+                this.audioContentIDField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public long UserStatRank {
+            get {
+                return this.userStatRankField;
+            }
+            set {
+                this.userStatRankField = value;
+            }
+        }
     }
     
     /// <remarks/>
@@ -447,6 +662,8 @@ namespace ItunesSSWindows.startstop {
         
         private System.DateTime modifiedOnField;
         
+        private string moreInfoURLField;
+        
         /// <remarks/>
         public long OverviewID {
             get {
@@ -504,6 +721,16 @@ namespace ItunesSSWindows.startstop {
             }
             set {
                 this.modifiedOnField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string MoreInfoURL {
+            get {
+                return this.moreInfoURLField;
+            }
+            set {
+                this.moreInfoURLField = value;
             }
         }
     }
@@ -573,6 +800,32 @@ namespace ItunesSSWindows.startstop {
         private object[] results;
         
         internal AddUserStatCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public MessageResponse Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((MessageResponse)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    public delegate void AddUserStatMusicCompletedEventHandler(object sender, AddUserStatMusicCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class AddUserStatMusicCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal AddUserStatMusicCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }

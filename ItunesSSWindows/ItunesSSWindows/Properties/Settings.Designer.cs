@@ -26,16 +26,6 @@ namespace ItunesSSWindows.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://developerapi.startstop.me/developerapi.asmx")]
-        public string ItunesSSWindows_statdropws_DeveloperAPI {
-            get {
-                return ((string)(this["ItunesSSWindows_statdropws_DeveloperAPI"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
         [global::System.Configuration.DefaultSettingValueAttribute("http://rpcservice.startstop.me/AccessPoint.asmx")]
         public string ItunesSSWindows_startstop_AccessPoint {
             get {

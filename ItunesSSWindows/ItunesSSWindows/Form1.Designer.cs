@@ -97,7 +97,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(119, 13);
             this.label1.TabIndex = 7;
-            this.label1.Text = "Version 1.1.0.0 (Build 6)";
+            this.label1.Text = "Version 1.1.0.0 (Build 7)";
             // 
             // label2
             // 
@@ -106,7 +106,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(88, 13);
             this.label2.TabIndex = 8;
-            this.label2.Text = "17th March 2012";
+            this.label2.Text = "18th March 2012";
             // 
             // Form1
             // 

@@ -2,9 +2,6 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="ItunesSSWindows.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="ItunesSSWindows_statdropws_DeveloperAPI" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">http://developerapi.startstop.me/developerapi.asmx</Value>
-    </Setting>
     <Setting Name="ItunesSSWindows_startstop_AccessPoint" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">http://rpcservice.startstop.me/AccessPoint.asmx</Value>
     </Setting>
