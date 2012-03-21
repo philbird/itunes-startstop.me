@@ -68,6 +68,12 @@ namespace ItunesSSWindows
         public Form1()
         {
             InitializeComponent();
+            MessageBox.Show(@"
+Welcome to the iTunes uploader. This is a pre-release which means it's not completely ready yet. However, it does work. It needs some more onscreen instructions. 
+
+You need to have iTunes running and you should have a StartStop.Me account, enter your login details before you click RUN. 
+
+"); 
         }
 
 

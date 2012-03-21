@@ -95,9 +95,9 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(22, 237);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(119, 13);
+            this.label1.Size = new System.Drawing.Size(240, 13);
             this.label1.TabIndex = 7;
-            this.label1.Text = "Version 1.1.0.0 (Build 7)";
+            this.label1.Text = "Version 0.1.1.0 (Build 7) - PRE RELEASE ALPHA\r\n";
             // 
             // label2
             // 
