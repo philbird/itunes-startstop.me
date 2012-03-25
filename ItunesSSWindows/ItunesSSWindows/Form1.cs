@@ -187,7 +187,11 @@ You need to have iTunes running and you should have a StartStop.Me account, ente
                             oMostPlayedSong.Genre = currTrack.Genre;
                             oMostPlayedSong.Notes = "";
                             oMostPlayedSong.ReportingUserID = ValidatedUserInfo.UserID;
-                            oMostPlayedSong.Year = new DateTime(currTrack.Year, 1, 1, 0, 0, 0);
+                            // Catch if there is an invalid date. 
+                            if (currTrack.Year != 0)
+                            {
+                                oMostPlayedSong.Year = new DateTime(currTrack.Year, 1, 1, 0, 0, 0);
+                            }
                         }
 
                         if (currTrack.Unplayed)
